@@ -42,8 +42,9 @@ img{max-width:100%;display:block}
 
 /* ---- NAV ---- */
 .site-nav{position:sticky;top:0;z-index:1000;background:var(--navy);box-shadow:0 2px 20px rgba(0,0,0,.28)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1160px;margin:0 auto;padding:0 24px}
-.nav-logo-link{cursor:pointer;display:flex;align-items:center;flex-shrink:0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:80px;max-width:1160px;margin:0 auto;padding:0 24px}
+.nav-logo-link{cursor:pointer;display:flex;align-items:center;flex-shrink:0;padding:6px 0}
+.nav-logo-link svg{height:64px;width:auto;display:block}
 .nav-links{display:flex;gap:4px;list-style:none;align-items:center}
 .nav-links a{
   font-family:'Barlow Condensed',sans-serif;font-size:.92rem;font-weight:700;
@@ -268,7 +269,7 @@ img{max-width:100%;display:block}
   .stats-row{grid-template-columns:repeat(2,1fr)}
   .nav-links{
     display:none;flex-direction:column;position:absolute;
-    top:68px;left:0;right:0;background:var(--navy2);
+    top:88px;left:0;right:0;background:var(--navy2);
     padding:12px;gap:3px;box-shadow:0 8px 24px rgba(0,0,0,.35)
   }
   .nav-links.open{display:flex}
@@ -284,9 +285,175 @@ img{max-width:100%;display:block}
 /* ---- PAGE TRANSITION ---- */
 #app{animation:fadein .22s ease}
 @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---- SPLASH PAGE ---- */
+.splash-page{
+  min-height:100vh;background:#ffffff;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:40px 24px;
+}
+.splash-logo-wrap{
+  width:80%;max-width:900px;
+  cursor:pointer;
+  transition:transform .25s,filter .25s;
+  display:block;
+}
+.splash-logo-wrap:hover{
+  transform:scale(1.015);
+  filter:drop-shadow(0 8px 32px rgba(232,99,26,.18));
+}
+.splash-logo-wrap svg{width:100%;height:auto;display:block}
+.splash-hint{
+  margin-top:36px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.88rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+  display:flex;align-items:center;gap:10px;
+  animation:pulse 2.4s ease-in-out infinite;
+}
+.splash-hint::before,.splash-hint::after{
+  content:'';display:block;width:28px;height:1.5px;background:var(--muted);border-radius:2px;
+}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
 </style>
 </head>
 <body>
+
+<!-- =====================================================
+     SVG SYMBOL DEFS — logo reused via <use href="#logo-white">
+     ===================================================== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <symbol id="logo-white" viewBox="0 0 792 612">
+      <g>
+        <g>
+          <path d="M255.439,330.983h5.37v26.956h18.336v4.501h-23.706v-31.457Z" fill="#f15f23"/>
+          <path d="M309.258,355.81h-14.05l-2.224,6.629h-5.641l10.957-31.457h7.867l10.903,31.457h-5.641l-2.17-6.629ZM296.618,351.552h11.229l-5.37-16.166h-.488l-5.37,16.166Z" fill="#f15f23"/>
+          <path d="M352.282,357.31c0,2.855-1.845,5.13-5.48,5.13h-15.243c-2.93,0-5.37-1.404-5.37-4.791v-5.468h5.208v5.856h15.623v-7.26l-17.902-5.034c-2.17-.629-2.929-1.887-2.929-3.822v-6.921c0-2.856,1.899-4.018,4.828-4.018h16.437c3.689,0,4.829,1.936,4.829,5.372v4.403h-5.262v-5.372h-15.623v6.437l18.336,5.179c1.899.629,2.55,1.742,2.55,3.775v6.533Z" fill="#f15f23"/>
+          <path d="M363.625,330.983h23.435v4.403h-18.065v9.1h12.205v4.209h-12.205v9.341h18.065v4.403h-23.435v-31.457Z" fill="#f15f23"/>
+          <path d="M397.752,362.44v-31.457h20.885c3.472,0,4.936,1.694,4.936,4.889v12.147c0,2.855-1.464,4.307-4.394,4.307l4.503,10.114h-5.37l-4.503-10.065h-10.74v10.065h-5.316ZM418.366,348.067v-12.583h-15.298v12.583h15.298Z" fill="#f15f23"/>
+          <path d="M477.989,357.31c0,2.855-1.844,5.13-5.478,5.13h-15.244c-2.93,0-5.37-1.404-5.37-4.791v-5.468h5.207v5.856h15.624v-7.26l-17.901-5.034c-2.17-.629-2.93-1.887-2.93-3.822v-6.921c0-2.856,1.899-4.018,4.829-4.018h16.437c3.688,0,4.827,1.936,4.827,5.372v4.403h-5.261v-5.372h-15.624v6.437l18.336,5.179c1.899.629,2.55,1.742,2.55,3.775v6.533Z" fill="#f15f23"/>
+          <path d="M489.063,357.649v-22.602c0-2.855,1.953-4.065,4.829-4.065h16.924c3.581,0,4.774,1.936,4.774,5.372v20.906c0,2.759-1.899,5.179-5.534,5.179h-15.568c-2.93,0-5.425-1.404-5.425-4.791ZM510.274,357.939v-22.455h-16.004v22.455h16.004Z" fill="#f15f23"/>
+          <path d="M527.258,330.983h5.37v26.956h18.336v4.501h-23.706v-31.457Z" fill="#f15f23"/>
+          <path d="M587.423,330.983v26.279c0,2.759-1.79,5.179-5.425,5.179h-15.622c-2.93,0-5.37-1.404-5.37-4.791v-26.666h5.316v26.956h15.731v-26.956h5.37Z" fill="#f15f23"/>
+          <path d="M607.502,335.435h-11.176v-4.452h27.72v4.452h-11.174v27.005h-5.37v-27.005Z" fill="#f15f23"/>
+          <path d="M633.707,330.983h5.37v31.457h-5.37v-31.457Z" fill="#f15f23"/>
+          <path d="M651.341,357.649v-22.602c0-2.855,1.953-4.065,4.829-4.065h16.924c3.581,0,4.774,1.936,4.774,5.372v20.906c0,2.759-1.899,5.179-5.534,5.179h-15.568c-2.93,0-5.425-1.404-5.425-4.791ZM672.552,357.939v-22.455h-16.004v22.455h16.004Z" fill="#f15f23"/>
+          <path d="M710.476,362.44l-9.168-14.615c-1.411-2.275-4.287-7.017-6.889-11.42.053,4.209.107,8.517.107,10.308v15.728h-4.99v-31.457h6.782l9.71,15.438c1.248,2.034,4.285,7.019,6.889,11.471-.055-4.938-.164-10.455-.164-11.761v-15.148h4.992v31.457h-7.269Z" fill="#f15f23"/>
+          <path d="M755.181,357.31c0,2.855-1.844,5.13-5.478,5.13h-15.244c-2.93,0-5.37-1.404-5.37-4.791v-5.468h5.207v5.856h15.624v-7.26l-17.901-5.034c-2.17-.629-2.93-1.887-2.93-3.822v-6.921c0-2.856,1.899-4.018,4.829-4.018h16.437c3.688,0,4.827,1.936,4.827,5.372v4.403h-5.261v-5.372h-15.624v6.437l18.336,5.179c1.899.629,2.55,1.742,2.55,3.775v6.533Z" fill="#f15f23"/>
+        </g>
+        <g fill="#ffffff">
+          <path d="M334.007,390.036c0-4.177,3.199-7.198,7.498-7.198c2.279,0,4.239.82,5.538,2.339l-1.679,1.581c-1.02-1.101-2.28-1.641-3.739-1.641c-2.899,0-4.998,2.04-4.998,4.919s2.099,4.919,4.998,4.919c1.459,0,2.719-.54,3.739-1.66l1.679,1.599c-1.299,1.52-3.259,2.339-5.559,2.339c-4.278,0-7.477-3.018-7.477-7.198Z"/>
+          <path d="M351.905,383.039h2.599v11.795h7.318v2.2h-9.917v-13.995Z"/>
+          <path d="M376.741,394.855v2.179h-10.496v-13.995h10.216v2.179h-7.617v3.637h6.757v2.14h-6.757v3.859h7.898Z"/>
+          <path d="M391.08,393.795h-6.998l-1.379,3.238h-2.68l6.298-13.995h2.559l6.317,13.995h-2.719l-1.398-3.238ZM390.22,391.755l-2.64-6.118-2.619,6.118h5.259Z"/>
+          <path d="M411.774,383.039v13.995h-2.138l-7.718-9.476v9.476h-2.578v-13.995h2.14l7.716,9.476v-9.476h2.578Z"/>
+          <path d="M428.394,394.855v2.179h-10.496v-13.995h10.216v2.179h-7.617v3.637h6.757v2.14h-6.757v3.859h7.898Z"/>
+          <path d="M442.811,397.034l-2.858-4.098c-.181.021-.361.021-.54.021h-3.159v4.078h-2.599v-13.995h5.758c3.679,0,5.958,1.878,5.958,4.977c0,2.119-1.08,3.679-2.979,4.418l3.22,4.599h-2.8ZM439.293,385.237h-3.039v5.579h3.039c2.279,0,3.459-1.041,3.459-2.8s-1.18-2.779-3.459-2.779Z"/>
+          <path d="M465.21,395.555l.899-2.019c1.12.899,2.9,1.539,4.618,1.539c2.181,0,3.099-.781,3.099-1.82c0-3.02-8.317-1.041-8.317-6.238c0-2.26,1.799-4.179,5.638-4.179c1.68,0,3.44.44,4.659,1.24l-.82,2.019c-1.259-.74-2.638-1.099-3.858-1.099c-2.16,0-3.039.839-3.039,1.899c0,2.979,8.297,1.041,8.297,6.178c0,2.239-1.82,4.159-5.658,4.159c-2.179,0-4.358-.679-5.517-1.679Z"/>
+          <path d="M490.405,393.795h-6.996l-1.379,3.238h-2.68l6.298-13.995h2.559l6.317,13.995h-2.719l-1.4-3.238ZM489.546,391.755l-2.64-6.118-2.619,6.118h5.259Z"/>
+          <path d="M501.266,385.218v4.258h6.757v2.2h-6.757v5.357h-2.599v-13.995h10.216v2.179h-7.617Z"/>
+          <path d="M524.261,394.855v2.179h-10.496v-13.995h10.216v2.179h-7.617v3.637h6.757v2.14h-6.757v3.859h7.898Z"/>
+          <path d="M538.679,397.034l-2.858-4.098c-.181.021-.361.021-.54.021h-3.159v4.078h-2.599v-13.995h5.758c3.679,0,5.958,1.878,5.958,4.977c0,2.119-1.08,3.679-2.979,4.418l3.22,4.599h-2.8ZM535.16,385.237h-3.039v5.579h3.039c2.279,0,3.459-1.041,3.459-2.8s-1.18-2.779-3.459-2.779Z"/>
+          <path d="M561.079,395.555l.899-2.019c1.12.899,2.9,1.539,4.618,1.539c2.179,0,3.099-.781,3.099-1.82c0-3.02-8.317-1.041-8.317-6.238c0-2.26,1.801-4.179,5.64-4.179c1.679,0,3.438.44,4.657,1.24l-.819,2.019c-1.261-.74-2.64-1.099-3.859-1.099c-2.16,0-3.039.839-3.039,1.899c0,2.979,8.297,1.041,8.297,6.178c0,2.239-1.82,4.159-5.658,4.159c-2.179,0-4.358-.679-5.517-1.679Z"/>
+          <path d="M590.052,397.034l-.021-9.277-4.599,7.678h-1.159l-4.599-7.557v9.157h-2.478v-13.995h2.14l5.557,9.277l5.459-9.277h2.14l.021,13.995h-2.459Z"/>
+          <path d="M607.731,393.795h-6.998l-1.379,3.238h-2.68l6.298-13.995h2.559l6.317,13.995h-2.719l-1.398-3.238ZM606.871,391.755l-2.64-6.118-2.619,6.118h5.259Z"/>
+          <path d="M625.149,397.034l-2.858-4.098c-.181.021-.361.021-.54.021h-3.159v4.078h-2.599v-13.995h5.758c3.679,0,5.958,1.878,5.958,4.977c0,2.119-1.08,3.679-2.979,4.418l3.22,4.599h-2.8ZM621.63,385.237h-3.039v5.579h3.039c2.279,0,3.459-1.041,3.459-2.8s-1.18-2.779-3.459-2.779Z"/>
+          <path d="M635.607,385.237h-4.637v-2.198h11.876v2.198h-4.638v11.797h-2.601v-11.797Z"/>
+          <path d="M657.663,394.855v2.179h-10.496v-13.995h10.216v2.179h-7.617v3.637h6.757v2.14h-6.757v3.859h7.898Z"/>
+          <path d="M672.083,397.034l-2.858-4.098c-.181.021-.361.021-.54.021h-3.159v4.078h-2.599v-13.995h5.758c3.679,0,5.958,1.878,5.958,4.977c0,2.119-1.08,3.679-2.979,4.418l3.22,4.599h-2.8ZM668.564,385.237h-3.039v5.579h3.039c2.279,0,3.459-1.041,3.459-2.8s-1.18-2.779-3.459-2.779Z"/>
+        </g>
+        <rect x="255.44" y="389.24" width="62.392" height="2.89" fill="#ffffff"/>
+        <rect x="692.795" y="389.24" width="62.391" height="2.89" fill="#ffffff"/>
+        <g fill="#ffffff">
+          <path d="M255.22,252.97h44.642c6.985,0,9.414,4.107,9.414,11.109v20.791c0,5.508-3.541,10.642-10.932,10.642h-28.345v18.136h-14.78v-60.679ZM294.7,284.216v-19.39h-24.7v19.39h24.7Z"/>
+          <path d="M318.582,313.648v-60.679h45.05c6.985,0,9.719,3.827,9.719,10.735v22.031c0,5.975-2.33,9.055-7.796,9.708l7.491,18.204h-14.78l-7.188-18.017h-17.715v18.017h-14.781ZM358.874,284.336v-19.23h-25.511v19.23h25.511Z"/>
+          <path d="M383.567,252.97h49.302v11.389h-34.419v13.069h34.233v11.202h-34.233v13.629h34.419v11.389h-49.302v-60.679Z"/>
+          <path d="M497.243,289.843v12.51c0,5.88-3.24,11.295-12.451,11.295h-29.965c-8.199,0-12.856-4.108-12.856-11.763v-37.247c0-8.681,4.352-11.669,11.64-11.669h31.99c8.504,0,11.642,3.921,11.642,12.135v8.122h-14.578v-8.122h-26.117v36.501h26.117v-11.763h14.578Z"/>
+          <path d="M508.069,252.97h14.881v60.679h-14.881v-60.679Z"/>
+          <path d="M589.353,302.353c0,6.814-4.352,11.295-12.35,11.295h-30.876c-6.479,0-11.945-3.268-11.945-10.828v-10.176h14.576v9.522h26.017v-9.802l-33.71-8.962c-5.265-1.493-6.883-4.108-6.883-9.522v-11.482c0-6.722,4.149-9.428,10.933-9.428h32.799c9.111,0,11.439,4.387,11.439,12.135v7.842h-14.578v-8.588h-26.017v8.775l33.913,8.962c5.367,1.494,6.682,3.921,6.682,9.988v10.27Z"/>
+          <path d="M600.685,252.97h14.881v60.679h-14.881v-60.679Z"/>
+          <path d="M627.204,302.82v-40.235c0-6.721,4.151-9.615,10.528-9.615h36.24c7.896,0,10.325,4.575,10.325,12.135v37.061c0,6.068-4.352,11.482-12.35,11.482h-32.697c-6.58,0-12.047-3.268-12.047-10.828ZM669.722,301.606v-36.501h-27.94v36.501h27.94Z"/>
+          <path d="M735.31,313.648l-18.02-28.38c-3.442-5.507-6.58-11.295-9.111-16.896.203,6.068.305,11.856.305,15.217v30.059h-13.364v-60.679h18.627l18.223,29.406c3.948,6.348,7.288,12.695,10.02,18.39-.201-7.095-.405-13.91-.405-17.457v-30.339h13.362v60.679h-19.638Z"/>
+        </g>
+      </g>
+      <circle cx="114.534" cy="320.711" r="18.773" fill="#f15f23"/>
+      <polygon points="188.481 394.659 40.586 394.659 40.586 246.764 155.574 246.764 175.345 223.641 17.464 223.641 17.464 417.782 211.604 417.782 211.604 252.49 188.481 273.979 188.481 394.659" fill="#ffffff"/>
+      <path d="M131.018,296.419c2.554,1.738,4.801,3.883,6.693,6.318l80.417-74.727v-33.769l-87.111,102.178Z" fill="#f15f23"/>
+      <path d="M90.506,337.55l-49.92,49.919v7.19h6.434l50.244-50.243c-2.61-1.907-4.898-4.221-6.758-6.866Z" fill="#f15f23"/>
+    </symbol>
+    <!-- Original-color logo (navy #253d84 + orange #f15f23) for light backgrounds -->
+    <symbol id="logo-color" viewBox="0 0 792 612">
+      <g>
+        <g>
+          <path d="M255.439,330.983h5.37v26.956h18.336v4.501h-23.706v-31.457Z" fill="#f15f23"/>
+          <path d="M309.258,355.81h-14.05l-2.224,6.629h-5.641l10.957-31.457h7.867l10.903,31.457h-5.641l-2.17-6.629ZM296.618,351.552h11.229l-5.37-16.166h-.488l-5.37,16.166Z" fill="#f15f23"/>
+          <path d="M352.282,357.31c0,2.855-1.845,5.13-5.48,5.13h-15.243c-2.93,0-5.37-1.404-5.37-4.791v-5.468h5.208v5.856h15.623v-7.26l-17.902-5.034c-2.17-.629-2.929-1.887-2.929-3.822v-6.921c0-2.856,1.899-4.018,4.828-4.018h16.437c3.689,0,4.829,1.936,4.829,5.372v4.403h-5.262v-5.372h-15.623v6.437l18.336,5.179c1.899.629,2.55,1.742,2.55,3.775v6.533Z" fill="#f15f23"/>
+          <path d="M363.625,330.983h23.435v4.403h-18.065v9.1h12.205v4.209h-12.205v9.341h18.065v4.403h-23.435v-31.457Z" fill="#f15f23"/>
+          <path d="M397.752,362.44v-31.457h20.885c3.472,0,4.936,1.694,4.936,4.889v12.147c0,2.855-1.464,4.307-4.394,4.307l4.503,10.114h-5.37l-4.503-10.065h-10.74v10.065h-5.316ZM418.366,348.067v-12.583h-15.298v12.583h15.298Z" fill="#f15f23"/>
+          <path d="M477.989,357.31c0,2.855-1.844,5.13-5.478,5.13h-15.244c-2.93,0-5.37-1.404-5.37-4.791v-5.468h5.207v5.856h15.624v-7.26l-17.901-5.034c-2.17-.629-2.93-1.887-2.93-3.822v-6.921c0-2.856,1.899-4.018,4.829-4.018h16.437c3.688,0,4.827,1.936,4.827,5.372v4.403h-5.261v-5.372h-15.624v6.437l18.336,5.179c1.899.629,2.55,1.742,2.55,3.775v6.533Z" fill="#f15f23"/>
+          <path d="M489.063,357.649v-22.602c0-2.855,1.953-4.065,4.829-4.065h16.924c3.581,0,4.774,1.936,4.774,5.372v20.906c0,2.759-1.899,5.179-5.534,5.179h-15.568c-2.93,0-5.425-1.404-5.425-4.791ZM510.274,357.939v-22.455h-16.004v22.455h16.004Z" fill="#f15f23"/>
+          <path d="M527.258,330.983h5.37v26.956h18.336v4.501h-23.706v-31.457Z" fill="#f15f23"/>
+          <path d="M587.423,330.983v26.279c0,2.759-1.79,5.179-5.425,5.179h-15.622c-2.93,0-5.37-1.404-5.37-4.791v-26.666h5.316v26.956h15.731v-26.956h5.37Z" fill="#f15f23"/>
+          <path d="M607.502,335.435h-11.176v-4.452h27.72v4.452h-11.174v27.005h-5.37v-27.005Z" fill="#f15f23"/>
+          <path d="M633.707,330.983h5.37v31.457h-5.37v-31.457Z" fill="#f15f23"/>
+          <path d="M651.341,357.649v-22.602c0-2.855,1.953-4.065,4.829-4.065h16.924c3.581,0,4.774,1.936,4.774,5.372v20.906c0,2.759-1.899,5.179-5.534,5.179h-15.568c-2.93,0-5.425-1.404-5.425-4.791ZM672.552,357.939v-22.455h-16.004v22.455h16.004Z" fill="#f15f23"/>
+          <path d="M710.476,362.44l-9.168-14.615c-1.411-2.275-4.287-7.017-6.889-11.42.053,4.209.107,8.517.107,10.308v15.728h-4.99v-31.457h6.782l9.71,15.438c1.248,2.034,4.285,7.019,6.889,11.471-.055-4.938-.164-10.455-.164-11.761v-15.148h4.992v31.457h-7.269Z" fill="#f15f23"/>
+          <path d="M755.181,357.31c0,2.855-1.844,5.13-5.478,5.13h-15.244c-2.93,0-5.37-1.404-5.37-4.791v-5.468h5.207v5.856h15.624v-7.26l-17.901-5.034c-2.17-.629-2.93-1.887-2.93-3.822v-6.921c0-2.856,1.899-4.018,4.829-4.018h16.437c3.688,0,4.827,1.936,4.827,5.372v4.403h-5.261v-5.372h-15.624v6.437l18.336,5.179c1.899.629,2.55,1.742,2.55,3.775v6.533Z" fill="#f15f23"/>
+        </g>
+        <g fill="#253d84">
+          <path d="M334.007,390.036c0-4.177,3.199-7.198,7.498-7.198c2.279,0,4.239.82,5.538,2.339l-1.679,1.581c-1.02-1.101-2.28-1.641-3.739-1.641c-2.899,0-4.998,2.04-4.998,4.919s2.099,4.919,4.998,4.919c1.459,0,2.719-.54,3.739-1.66l1.679,1.599c-1.299,1.52-3.259,2.339-5.559,2.339c-4.278,0-7.477-3.018-7.477-7.198Z"/>
+          <path d="M351.905,383.039h2.599v11.795h7.318v2.2h-9.917v-13.995Z"/>
+          <path d="M376.741,394.855v2.179h-10.496v-13.995h10.216v2.179h-7.617v3.637h6.757v2.14h-6.757v3.859h7.898Z"/>
+          <path d="M391.08,393.795h-6.998l-1.379,3.238h-2.68l6.298-13.995h2.559l6.317,13.995h-2.719l-1.398-3.238ZM390.22,391.755l-2.64-6.118-2.619,6.118h5.259Z"/>
+          <path d="M411.774,383.039v13.995h-2.138l-7.718-9.476v9.476h-2.578v-13.995h2.14l7.716,9.476v-9.476h2.578Z"/>
+          <path d="M428.394,394.855v2.179h-10.496v-13.995h10.216v2.179h-7.617v3.637h6.757v2.14h-6.757v3.859h7.898Z"/>
+          <path d="M442.811,397.034l-2.858-4.098c-.181.021-.361.021-.54.021h-3.159v4.078h-2.599v-13.995h5.758c3.679,0,5.958,1.878,5.958,4.977c0,2.119-1.08,3.679-2.979,4.418l3.22,4.599h-2.8ZM439.293,385.237h-3.039v5.579h3.039c2.279,0,3.459-1.041,3.459-2.8s-1.18-2.779-3.459-2.779Z"/>
+          <path d="M465.21,395.555l.899-2.019c1.12.899,2.9,1.539,4.618,1.539c2.181,0,3.099-.781,3.099-1.82c0-3.02-8.317-1.041-8.317-6.238c0-2.26,1.799-4.179,5.638-4.179c1.68,0,3.44.44,4.659,1.24l-.82,2.019c-1.259-.74-2.638-1.099-3.858-1.099c-2.16,0-3.039.839-3.039,1.899c0,2.979,8.297,1.041,8.297,6.178c0,2.239-1.82,4.159-5.658,4.159c-2.179,0-4.358-.679-5.517-1.679Z"/>
+          <path d="M490.405,393.795h-6.996l-1.379,3.238h-2.68l6.298-13.995h2.559l6.317,13.995h-2.719l-1.4-3.238ZM489.546,391.755l-2.64-6.118-2.619,6.118h5.259Z"/>
+          <path d="M501.266,385.218v4.258h6.757v2.2h-6.757v5.357h-2.599v-13.995h10.216v2.179h-7.617Z"/>
+          <path d="M524.261,394.855v2.179h-10.496v-13.995h10.216v2.179h-7.617v3.637h6.757v2.14h-6.757v3.859h7.898Z"/>
+          <path d="M538.679,397.034l-2.858-4.098c-.181.021-.361.021-.54.021h-3.159v4.078h-2.599v-13.995h5.758c3.679,0,5.958,1.878,5.958,4.977c0,2.119-1.08,3.679-2.979,4.418l3.22,4.599h-2.8ZM535.16,385.237h-3.039v5.579h3.039c2.279,0,3.459-1.041,3.459-2.8s-1.18-2.779-3.459-2.779Z"/>
+          <path d="M561.079,395.555l.899-2.019c1.12.899,2.9,1.539,4.618,1.539c2.179,0,3.099-.781,3.099-1.82c0-3.02-8.317-1.041-8.317-6.238c0-2.26,1.801-4.179,5.64-4.179c1.679,0,3.438.44,4.657,1.24l-.819,2.019c-1.261-.74-2.64-1.099-3.859-1.099c-2.16,0-3.039.839-3.039,1.899c0,2.979,8.297,1.041,8.297,6.178c0,2.239-1.82,4.159-5.658,4.159c-2.179,0-4.358-.679-5.517-1.679Z"/>
+          <path d="M590.052,397.034l-.021-9.277-4.599,7.678h-1.159l-4.599-7.557v9.157h-2.478v-13.995h2.14l5.557,9.277l5.459-9.277h2.14l.021,13.995h-2.459Z"/>
+          <path d="M607.731,393.795h-6.998l-1.379,3.238h-2.68l6.298-13.995h2.559l6.317,13.995h-2.719l-1.398-3.238ZM606.871,391.755l-2.64-6.118-2.619,6.118h5.259Z"/>
+          <path d="M625.149,397.034l-2.858-4.098c-.181.021-.361.021-.54.021h-3.159v4.078h-2.599v-13.995h5.758c3.679,0,5.958,1.878,5.958,4.977c0,2.119-1.08,3.679-2.979,4.418l3.22,4.599h-2.8ZM621.63,385.237h-3.039v5.579h3.039c2.279,0,3.459-1.041,3.459-2.8s-1.18-2.779-3.459-2.779Z"/>
+          <path d="M635.607,385.237h-4.637v-2.198h11.876v2.198h-4.638v11.797h-2.601v-11.797Z"/>
+          <path d="M657.663,394.855v2.179h-10.496v-13.995h10.216v2.179h-7.617v3.637h6.757v2.14h-6.757v3.859h7.898Z"/>
+          <path d="M672.083,397.034l-2.858-4.098c-.181.021-.361.021-.54.021h-3.159v4.078h-2.599v-13.995h5.758c3.679,0,5.958,1.878,5.958,4.977c0,2.119-1.08,3.679-2.979,4.418l3.22,4.599h-2.8ZM668.564,385.237h-3.039v5.579h3.039c2.279,0,3.459-1.041,3.459-2.8s-1.18-2.779-3.459-2.779Z"/>
+        </g>
+        <rect x="255.44" y="389.24" width="62.392" height="2.89" fill="#253d84"/>
+        <rect x="692.795" y="389.24" width="62.391" height="2.89" fill="#253d84"/>
+        <g fill="#253d84">
+          <path d="M255.22,252.97h44.642c6.985,0,9.414,4.107,9.414,11.109v20.791c0,5.508-3.541,10.642-10.932,10.642h-28.345v18.136h-14.78v-60.679ZM294.7,284.216v-19.39h-24.7v19.39h24.7Z"/>
+          <path d="M318.582,313.648v-60.679h45.05c6.985,0,9.719,3.827,9.719,10.735v22.031c0,5.975-2.33,9.055-7.796,9.708l7.491,18.204h-14.78l-7.188-18.017h-17.715v18.017h-14.781ZM358.874,284.336v-19.23h-25.511v19.23h25.511Z"/>
+          <path d="M383.567,252.97h49.302v11.389h-34.419v13.069h34.233v11.202h-34.233v13.629h34.419v11.389h-49.302v-60.679Z"/>
+          <path d="M497.243,289.843v12.51c0,5.88-3.24,11.295-12.451,11.295h-29.965c-8.199,0-12.856-4.108-12.856-11.763v-37.247c0-8.681,4.352-11.669,11.64-11.669h31.99c8.504,0,11.642,3.921,11.642,12.135v8.122h-14.578v-8.122h-26.117v36.501h26.117v-11.763h14.578Z"/>
+          <path d="M508.069,252.97h14.881v60.679h-14.881v-60.679Z"/>
+          <path d="M589.353,302.353c0,6.814-4.352,11.295-12.35,11.295h-30.876c-6.479,0-11.945-3.268-11.945-10.828v-10.176h14.576v9.522h26.017v-9.802l-33.71-8.962c-5.265-1.493-6.883-4.108-6.883-9.522v-11.482c0-6.722,4.149-9.428,10.933-9.428h32.799c9.111,0,11.439,4.387,11.439,12.135v7.842h-14.578v-8.588h-26.017v8.775l33.913,8.962c5.367,1.494,6.682,3.921,6.682,9.988v10.27Z"/>
+          <path d="M600.685,252.97h14.881v60.679h-14.881v-60.679Z"/>
+          <path d="M627.204,302.82v-40.235c0-6.721,4.151-9.615,10.528-9.615h36.24c7.896,0,10.325,4.575,10.325,12.135v37.061c0,6.068-4.352,11.482-12.35,11.482h-32.697c-6.58,0-12.047-3.268-12.047-10.828ZM669.722,301.606v-36.501h-27.94v36.501h27.94Z"/>
+          <path d="M735.31,313.648l-18.02-28.38c-3.442-5.507-6.58-11.295-9.111-16.896.203,6.068.305,11.856.305,15.217v30.059h-13.364v-60.679h18.627l18.223,29.406c3.948,6.348,7.288,12.695,10.02,18.39-.201-7.095-.405-13.91-.405-17.457v-30.339h13.362v60.679h-19.638Z"/>
+        </g>
+      </g>
+      <circle cx="114.534" cy="320.711" r="18.773" fill="#f15f23"/>
+      <polygon points="188.481 394.659 40.586 394.659 40.586 246.764 155.574 246.764 175.345 223.641 17.464 223.641 17.464 417.782 211.604 417.782 211.604 252.49 188.481 273.979 188.481 394.659" fill="#253d84"/>
+      <path d="M131.018,296.419c2.554,1.738,4.801,3.883,6.693,6.318l80.417-74.727v-33.769l-87.111,102.178Z" fill="#f15f23"/>
+      <path d="M90.506,337.55l-49.92,49.919v7.19h6.434l50.244-50.243c-2.61-1.907-4.898-4.221-6.758-6.866Z" fill="#f15f23"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ======= SPLASH PAGE TEMPLATE ======= -->
+<template id="tpl-splash">
+<div class="splash-page">
+  <div class="splash-logo-wrap" onclick="nav('home')" title="Enter site">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612" aria-label="Precision Laser Solutions"><use href="#logo-color"/></svg>
+  </div>
+  <div class="splash-hint">Click to Enter</div>
+</div>
+</template>
 
 <!-- =====================================================
      NAVIGATION — always visible
@@ -294,48 +461,7 @@ img{max-width:100%;display:block}
 <nav class="site-nav" id="siteNav">
   <div class="nav-inner">
     <div class="nav-logo-link" onclick="nav('home')" title="Home">
-      <!-- SVG Logo — crisp vector recreation of Precision Laser Solutions -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" height="48" aria-label="Precision Laser Solutions">
-        <!-- Icon mark -->
-        <g transform="translate(4,4)">
-          <!-- Outer square frame -->
-          <rect x="0" y="0" width="58" height="58" rx="3"
-                fill="none" stroke="#1B2A4A" stroke-width="6"/>
-          <!-- Orange diagonal beam — top-left corner to bottom-right, with point -->
-          <line x1="6" y1="6" x2="52" y2="52" stroke="#E8631A" stroke-width="5.5" stroke-linecap="round"/>
-          <!-- Laser dot / node -->
-          <circle cx="28" cy="28" r="5.5" fill="#E8631A"/>
-          <!-- Beam tail extending past corner -->
-          <line x1="34" y1="34" x2="56" y2="56" stroke="#E8631A" stroke-width="5.5" stroke-linecap="round"/>
-          <!-- Bottom-right corner cut (navy fill to create notch effect) -->
-          <polygon points="40,58 58,40 58,58" fill="#1B2A4A"/>
-        </g>
-        <!-- Wordmark -->
-        <g transform="translate(76,8)">
-          <!-- PRECISION -->
-          <text x="0" y="26"
-                font-family="'Barlow Condensed',sans-serif"
-                font-weight="800" font-size="26"
-                letter-spacing="1.5"
-                fill="#1B2A4A">PRECISION</text>
-          <!-- LASER SOLUTIONS -->
-          <text x="0" y="50"
-                font-family="'Barlow Condensed',sans-serif"
-                font-weight="800" font-size="26"
-                letter-spacing="1.5"
-                fill="#E8631A">LASER SOLUTIONS</text>
-          <!-- Tagline rule left -->
-          <line x1="0" y1="62" x2="38" y2="62" stroke="#1B2A4A" stroke-width="1.5"/>
-          <!-- Tagline text -->
-          <text x="44" y="65.5"
-                font-family="'Barlow Condensed',sans-serif"
-                font-weight="600" font-size="10"
-                letter-spacing="3.5"
-                fill="#1B2A4A">CLEANER  SAFER  SMARTER</text>
-          <!-- Tagline rule right -->
-          <line x1="216" y1="62" x2="238" y2="62" stroke="#1B2A4A" stroke-width="1.5"/>
-        </g>
-      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 188 196 230" height="72" aria-label="Precision Laser Solutions Home"><use href="#logo-icon"/></svg>
     </div>
 
     <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobile()">
@@ -360,6 +486,16 @@ img{max-width:100%;display:block}
 <!-- =====================================================
      PAGE TEMPLATES
      ===================================================== -->
+
+<!-- ======= SPLASH ======= -->
+<template id="tpl-splash">
+<div class="splash-page">
+  <div class="splash-logo-wrap" onclick="nav('home')" title="Enter site">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612" aria-label="Precision Laser Solutions"><use href="#logo-color"/></svg>
+  </div>
+  <div class="splash-hint">Click to Enter</div>
+</div>
+</template>
 
 <!-- ======= HOME ======= -->
 <template id="tpl-home">
@@ -402,7 +538,7 @@ img{max-width:100%;display:block}
       <div><span class="stat-num">12+</span><span class="stat-label">Industries Served</span></div>
       <div><span class="stat-num">100+</span><span class="stat-label">Projects Completed</span></div>
       <div><span class="stat-num">0</span><span class="stat-label">Chemicals Used</span></div>
-      <div><span class="stat-num">100%</span><span class="stat-label">Non-Abrasive</span></div>
+      <div><span class="stat-num">0</span><span class="stat-label">Abrasives Used</span></div>
     </div>
   </div>
 </div>
@@ -464,19 +600,9 @@ img{max-width:100%;display:block}
 <footer class="site-footer"><div class="container">
   <div class="footer-grid">
     <div class="footer-brand">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" height="44" aria-label="Precision Laser Solutions">
-        <g transform="translate(2,1)">
-          <rect x="0" y="0" width="50" height="50" rx="3" fill="none" stroke="#fff" stroke-width="5"/>
-          <line x1="5" y1="5" x2="45" y2="45" stroke="#E8631A" stroke-width="5" stroke-linecap="round"/>
-          <circle cx="24" cy="24" r="5" fill="#E8631A"/>
-          <line x1="29" y1="29" x2="47" y2="47" stroke="#E8631A" stroke-width="5" stroke-linecap="round"/>
-          <polygon points="35,50 50,35 50,50" fill="#0f1e36"/>
-        </g>
-        <g transform="translate(62,6)">
-          <text x="0" y="22" font-family="'Barlow Condensed',sans-serif" font-weight="800" font-size="22" letter-spacing="1.2" fill="#fff">PRECISION</text>
-          <text x="0" y="43" font-family="'Barlow Condensed',sans-serif" font-weight="800" font-size="22" letter-spacing="1.2" fill="#E8631A">LASER SOLUTIONS</text>
-        </g>
-      </svg>
+      <div onclick="nav('home')" style="cursor:pointer;display:inline-block">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612" height="48" aria-label="Precision Laser Solutions"><use href="#logo-white"/></svg>
+      </div>
       <p>Industrial laser cleaning solutions for the most demanding environments.<br>Cleaner &nbsp;·&nbsp; Safer &nbsp;·&nbsp; Smarter</p>
     </div>
     <div class="footer-col"><h4>Services</h4><ul>
@@ -976,6 +1102,10 @@ function nav(page, pushState = true) {
 
   currentPage = page;
 
+  // Hide nav on splash, show on all other pages
+  const navEl = document.getElementById('siteNav');
+  if (navEl) navEl.style.display = page === 'splash' ? 'none' : '';
+
   // Push browser history so back/forward work
   if (pushState) {
     const url = page === 'home' ? '/' : `/${page}`;
@@ -1033,13 +1163,14 @@ function render(page) {
 
   // Main pages
   const tplId = {
+    splash:   'tpl-splash',
     home:     'tpl-home',
     services: 'tpl-services',
     projects: 'tpl-projects',
     about:    'tpl-about',
     clients:  'tpl-clients',
     contact:  'tpl-contact',
-  }[page] || 'tpl-home';
+  }[page] || 'tpl-splash';
 
   const tpl = document.getElementById(tplId).content.cloneNode(true);
   injectFooter(tpl);
@@ -1059,19 +1190,7 @@ function injectFooter(fragment) {
         <div class="footer-grid">
           <div class="footer-brand">
             <div onclick="nav('home')" style="cursor:pointer;display:inline-block">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" height="44" aria-label="Precision Laser Solutions">
-                <g transform="translate(2,1)">
-                  <rect x="0" y="0" width="50" height="50" rx="3" fill="none" stroke="#fff" stroke-width="5"/>
-                  <line x1="5" y1="5" x2="45" y2="45" stroke="#E8631A" stroke-width="5" stroke-linecap="round"/>
-                  <circle cx="24" cy="24" r="5" fill="#E8631A"/>
-                  <line x1="29" y1="29" x2="47" y2="47" stroke="#E8631A" stroke-width="5" stroke-linecap="round"/>
-                  <polygon points="35,50 50,35 50,50" fill="#0f1e36"/>
-                </g>
-                <g transform="translate(62,6)">
-                  <text x="0" y="22" font-family="'Barlow Condensed',sans-serif" font-weight="800" font-size="22" letter-spacing="1.2" fill="#fff">PRECISION</text>
-                  <text x="0" y="43" font-family="'Barlow Condensed',sans-serif" font-weight="800" font-size="22" letter-spacing="1.2" fill="#E8631A">LASER SOLUTIONS</text>
-                </g>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612" height="48" aria-label="Precision Laser Solutions"><use href="#logo-white"/></svg>
             </div>
             <p>Industrial laser cleaning solutions.<br>Cleaner &nbsp;·&nbsp; Safer &nbsp;·&nbsp; Smarter</p>
           </div>
@@ -1133,17 +1252,24 @@ function toggleMobile() {
 // ============================================================
 window.addEventListener('popstate', function(e) {
   const page = e.state && e.state.page ? e.state.page : 'home';
-  nav(page, false); // false = don't push state again
+  // Never pop back to splash via browser navigation — go to home instead
+  nav(page === 'splash' ? 'home' : page, false);
 });
 
 // ============================================================
 //  BOOT — detect initial URL
 // ============================================================
 (function boot() {
-  const path = window.location.pathname.replace(/^\//, '') || 'home';
-  // Push initial state so back button works from the first page
-  history.replaceState({ page: path }, '', window.location.href);
-  nav(path, false);
+  const path = window.location.pathname.replace(/^\//, '') || '';
+  const startPage = (path === '' || path === 'index.html') ? 'splash' : path;
+  // Replace state with splash, then after render replace history with 'home'
+  // so the browser back button never returns to splash
+  history.replaceState({ page: startPage }, '', window.location.href);
+  nav(startPage, false);
+  if (startPage === 'splash') {
+    // Replace the history entry so back button skips splash entirely
+    history.replaceState({ page: 'home' }, '', window.location.href);
+  }
 })();
 </script>
 </body>
