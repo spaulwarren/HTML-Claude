@@ -53,8 +53,7 @@ img{max-width:100%;display:block}
 }
 .nav-links a:hover{background:rgba(232,99,26,.18);color:var(--orange)}
 .nav-links a.active{background:var(--orange);color:#fff!important}
-.nav-cta{background:var(--orange)!important;color:#fff!important;padding:7px 18px!important}
-.nav-cta:hover{background:var(--orange2)!important}
+
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px}
 .hamburger span{display:block;width:23px;height:2.5px;background:#fff;border-radius:2px;transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
@@ -1133,9 +1132,11 @@ function nav(page, pushState = true) {
   // Scroll to top
   window.scrollTo(0, 0);
 
-  // Update active nav link
+  // Update active nav link — subpages highlight their parent
+  const pageRoot = page.startsWith('service') ? 'services' :
+                   page.startsWith('project') ? 'projects' : page;
   document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
-    a.classList.toggle('active', a.dataset.page === page);
+    a.classList.toggle('active', a.dataset.page === pageRoot);
   });
 
   // Render the page
