@@ -8,10 +8,10 @@
 <style>
 /* ============================================================
    PRECISION LASER SOLUTIONS — GLOBAL STYLES
-   Magnetic Blue #1F3A8F | Orange #E8631A | White #FFFFFF
+   Magnetic Blue #1F3A8F | Orange #f15f23 | White #FFFFFF
    ============================================================ */
 :root{
-  --navy:#1F3A8F;--navy2:#162d74;--orange:#E8631A;--orange2:#c94f0f;
+  --navy:#1F3A8F;--navy2:#162d74;--orange:#f15f23;--orange2:#d44d1a;
   --white:#fff;--offwhite:#F5F6F8;--gray:#E2E5EC;--muted:#6B7A99;
   --text:#1F3A8F;--radius:6px;
   --shadow:0 4px 24px rgba(31,58,143,.10);
@@ -51,7 +51,7 @@ img{max-width:100%;display:block}
   letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.82);
   padding:7px 13px;border-radius:var(--radius);transition:background .18s,color .18s;cursor:pointer
 }
-.nav-links a:hover{background:rgba(232,99,26,.18);color:var(--orange)}
+.nav-links a:hover{background:rgba(241,95,35,.18);color:var(--orange)}
 .nav-links a.active{background:var(--orange);color:#fff!important}
 
 .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px}
@@ -68,7 +68,7 @@ img{max-width:100%;display:block}
   transition:all .2s;border:2px solid transparent
 }
 .btn-primary{background:var(--orange);color:#fff;border-color:var(--orange)}
-.btn-primary:hover{background:var(--orange2);border-color:var(--orange2);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(232,99,26,.35)}
+.btn-primary:hover{background:var(--orange2);border-color:var(--orange2);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(241,95,35,.35)}
 .btn-outline{background:transparent;border-color:rgba(255,255,255,.7);color:#fff}
 .btn-outline:hover{background:#fff;color:var(--navy);border-color:#fff}
 .btn-outline-dark{background:transparent;border-color:var(--navy);color:var(--navy)}
@@ -93,7 +93,7 @@ img{max-width:100%;display:block}
 
 /* ---- HERO ---- */
 .hero{background:var(--navy);padding:90px 0 76px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(232,99,26,.1) 0%,transparent 60%);pointer-events:none}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(241,95,35,.1) 0%,transparent 60%);pointer-events:none}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:56px}
 .hero-text h1{color:#fff;margin-bottom:18px}
 .hero-text h1 span{color:var(--orange)}
@@ -101,7 +101,7 @@ img{max-width:100%;display:block}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 .hero-photo-area{
   border-radius:10px;overflow:hidden;
-  border:2px dashed rgba(232,99,26,.45);
+  border:2px dashed rgba(241,95,35,.45);
   min-height:340px;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   background:rgba(255,255,255,.04);
@@ -155,7 +155,7 @@ img{max-width:100%;display:block}
 
 /* ---- WHY ITEMS ---- */
 .why-item{display:flex;gap:18px;align-items:flex-start}
-.why-icon{width:50px;height:50px;border-radius:10px;background:rgba(232,99,26,.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.why-icon{width:50px;height:50px;border-radius:10px;background:rgba(241,95,35,.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
 .why-item h3{font-size:1.05rem;margin-bottom:6px}
 .why-item p{font-size:.88rem;color:var(--muted);margin:0}
 
@@ -177,7 +177,7 @@ img{max-width:100%;display:block}
 /* ---- CONTACT BLOCK ---- */
 .contact-item{display:flex;align-items:flex-start;gap:16px;padding:18px 0;border-bottom:1px solid var(--gray)}
 .contact-item:last-child{border-bottom:none}
-.ci-icon{width:44px;height:44px;border-radius:50%;background:rgba(232,99,26,.1);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.ci-icon{width:44px;height:44px;border-radius:50%;background:rgba(241,95,35,.1);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
 .ci-label{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:2px}
 .ci-val{font-size:1.02rem;color:var(--text)}
 
@@ -198,7 +198,7 @@ img{max-width:100%;display:block}
   padding:20px;cursor:pointer;transition:border-color .2s,background .2s;
   min-height:220px
 }
-.photo-ph:hover{border-color:var(--orange);background:rgba(232,99,26,.04)}
+.photo-ph:hover{border-color:var(--orange);background:rgba(241,95,35,.04)}
 .photo-ph svg{width:38px;height:38px;opacity:.35;margin-bottom:10px}
 
 /* ---- SUBPAGE ---- */
@@ -300,7 +300,7 @@ img{max-width:100%;display:block}
 }
 .splash-logo-wrap:hover{
   transform:scale(1.015);
-  filter:drop-shadow(0 8px 32px rgba(232,99,26,.18));
+  filter:drop-shadow(0 8px 32px rgba(241,95,35,.18));
 }
 .splash-logo-wrap svg{width:100%;height:auto;display:block}
 .splash-hint{
@@ -1037,7 +1037,7 @@ img{max-width:100%;display:block}
             <textarea placeholder="Describe your project, surfaces to be cleaned, contamination type, estimated scope, timeline, and any other relevant details..." required></textarea>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-          <p id="form-success" style="display:none;color:#1F3A8F;font-weight:600;margin-top:14px;text-align:center;background:rgba(232,99,26,.1);padding:12px;border-radius:6px">
+          <p id="form-success" style="display:none;color:#1F3A8F;font-weight:600;margin-top:14px;text-align:center;background:rgba(241,95,35,.1);padding:12px;border-radius:6px">
             ✅ Message sent! We'll be in touch within 1 business day.
           </p>
         </form>
