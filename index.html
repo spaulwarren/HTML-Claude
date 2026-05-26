@@ -42,9 +42,9 @@ img{max-width:100%;display:block}
 
 /* ---- NAV ---- */
 .site-nav{position:sticky;top:0;z-index:1000;background:var(--navy);box-shadow:0 2px 20px rgba(0,0,0,.28)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:88px;max-width:1160px;margin:0 auto;padding:0 24px}
-.nav-logo-link{cursor:pointer;display:flex;align-items:center;flex-shrink:0;padding:6px 0}
-.nav-logo-link svg{height:68px;width:auto;display:block}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100px;max-width:1160px;margin:0 auto;padding:0 24px}
+.nav-logo-link{cursor:pointer;display:flex;align-items:center;flex-shrink:0;padding:4px 0}
+.nav-logo-link svg{height:80px;width:auto;display:block}
 .nav-links{display:flex;gap:4px;list-style:none;align-items:center}
 .nav-links a{
   font-family:'Barlow Condensed',sans-serif;font-size:.92rem;font-weight:700;
@@ -155,10 +155,10 @@ img{max-width:100%;display:block}
 
 /* ---- WHY ITEMS ---- */
 .why-item{display:flex;gap:18px;align-items:flex-start}
-.why-icon{width:50px;height:50px;border-radius:10px;background:rgba(241,95,35,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.why-icon{width:50px;height:50px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .why-icon svg{width:26px;height:26px}
-.why-item h3{font-size:1.05rem;margin-bottom:6px}
-.why-item p{font-size:.88rem;color:var(--muted);margin:0}
+.why-item h3{font-size:1.05rem;margin-bottom:6px;color:#fff}
+.why-item p{font-size:.88rem;color:rgba(255,255,255,.7);margin:0}
 
 /* ---- TESTIMONIAL ---- */
 .testimonial{background:#fff;border-radius:10px;padding:26px 28px;box-shadow:var(--shadow);border-left:5px solid var(--orange);position:relative}
@@ -270,7 +270,7 @@ img{max-width:100%;display:block}
   .stats-row{grid-template-columns:repeat(2,1fr)}
   .nav-links{
     display:none;flex-direction:column;position:absolute;
-    top:88px;left:0;right:0;background:var(--navy2);
+    top:100px;left:0;right:0;background:var(--navy2);
     padding:12px;gap:3px;box-shadow:0 8px 24px rgba(0,0,0,.35)
   }
   .nav-links.open{display:flex}
@@ -633,7 +633,7 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="section section-dark">
   <div class="container">
     <div class="sec-head">
       <h2>Why Laser Cleaning?</h2>
