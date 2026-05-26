@@ -383,7 +383,13 @@ img{max-width:100%;display:block}
       <path d="M131.018,296.419c2.554,1.738,4.801,3.883,6.693,6.318l80.417-74.727v-33.769l-87.111,102.178Z" fill="#f15f23"/>
       <path d="M90.506,337.55l-49.92,49.919v7.19h6.434l50.244-50.243c-2.61-1.907-4.898-4.221-6.758-6.866Z" fill="#f15f23"/>
     </symbol>
-    <!-- Original-color logo (navy #253d84 + orange #f15f23) for light backgrounds -->
+    <!-- Icon-only mark — square frame + laser beam, no wordmark, white version for nav -->
+    <symbol id="logo-icon" viewBox="17 188 197 232">
+      <circle cx="114.534" cy="320.711" r="18.773" fill="#f15f23"/>
+      <polygon points="188.481 394.659 40.586 394.659 40.586 246.764 155.574 246.764 175.345 223.641 17.464 223.641 17.464 417.782 211.604 417.782 211.604 252.49 188.481 273.979 188.481 394.659" fill="#ffffff"/>
+      <path d="M131.018,296.419c2.554,1.738,4.801,3.883,6.693,6.318l80.417-74.727v-33.769l-87.111,102.178Z" fill="#f15f23"/>
+      <path d="M90.506,337.55l-49.92,49.919v7.19h6.434l50.244-50.243c-2.61-1.907-4.898-4.221-6.758-6.866Z" fill="#f15f23"/>
+    </symbol>
     <symbol id="logo-color" viewBox="0 0 792 612">
       <g>
         <g>
@@ -461,7 +467,12 @@ img{max-width:100%;display:block}
 <nav class="site-nav" id="siteNav">
   <div class="nav-inner">
     <div class="nav-logo-link" onclick="nav('home')" title="Home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 188 196 230" height="72" aria-label="Precision Laser Solutions Home"><use href="#logo-icon"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 188 197 232" aria-label="Precision Laser Solutions Home">
+        <circle cx="114.534" cy="320.711" r="18.773" fill="#f15f23"/>
+        <polygon points="188.481 394.659 40.586 394.659 40.586 246.764 155.574 246.764 175.345 223.641 17.464 223.641 17.464 417.782 211.604 417.782 211.604 252.49 188.481 273.979 188.481 394.659" fill="#ffffff"/>
+        <path d="M131.018,296.419c2.554,1.738,4.801,3.883,6.693,6.318l80.417-74.727v-33.769l-87.111,102.178Z" fill="#f15f23"/>
+        <path d="M90.506,337.55l-49.92,49.919v7.19h6.434l50.244-50.243c-2.61-1.907-4.898-4.221-6.758-6.866Z" fill="#f15f23"/>
+      </svg>
     </div>
 
     <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobile()">
@@ -601,7 +612,12 @@ img{max-width:100%;display:block}
   <div class="footer-grid">
     <div class="footer-brand">
       <div onclick="nav('home')" style="cursor:pointer;display:inline-block">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612" height="48" aria-label="Precision Laser Solutions"><use href="#logo-white"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 188 197 232" height="56" aria-label="Precision Laser Solutions">
+          <circle cx="114.534" cy="320.711" r="18.773" fill="#f15f23"/>
+          <polygon points="188.481 394.659 40.586 394.659 40.586 246.764 155.574 246.764 175.345 223.641 17.464 223.641 17.464 417.782 211.604 417.782 211.604 252.49 188.481 273.979 188.481 394.659" fill="#ffffff"/>
+          <path d="M131.018,296.419c2.554,1.738,4.801,3.883,6.693,6.318l80.417-74.727v-33.769l-87.111,102.178Z" fill="#f15f23"/>
+          <path d="M90.506,337.55l-49.92,49.919v7.19h6.434l50.244-50.243c-2.61-1.907-4.898-4.221-6.758-6.866Z" fill="#f15f23"/>
+        </svg>
       </div>
       <p>Industrial laser cleaning solutions for the most demanding environments.<br>Cleaner &nbsp;·&nbsp; Safer &nbsp;·&nbsp; Smarter</p>
     </div>
@@ -1190,7 +1206,12 @@ function injectFooter(fragment) {
         <div class="footer-grid">
           <div class="footer-brand">
             <div onclick="nav('home')" style="cursor:pointer;display:inline-block">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612" height="48" aria-label="Precision Laser Solutions"><use href="#logo-white"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 188 197 232" height="56" aria-label="Precision Laser Solutions">
+                <circle cx="114.534" cy="320.711" r="18.773" fill="#f15f23"/>
+                <polygon points="188.481 394.659 40.586 394.659 40.586 246.764 155.574 246.764 175.345 223.641 17.464 223.641 17.464 417.782 211.604 417.782 211.604 252.49 188.481 273.979 188.481 394.659" fill="#ffffff"/>
+                <path d="M131.018,296.419c2.554,1.738,4.801,3.883,6.693,6.318l80.417-74.727v-33.769l-87.111,102.178Z" fill="#f15f23"/>
+                <path d="M90.506,337.55l-49.92,49.919v7.19h6.434l50.244-50.243c-2.61-1.907-4.898-4.221-6.758-6.866Z" fill="#f15f23"/>
+              </svg>
             </div>
             <p>Industrial laser cleaning solutions.<br>Cleaner &nbsp;·&nbsp; Safer &nbsp;·&nbsp; Smarter</p>
           </div>
@@ -1260,16 +1281,19 @@ window.addEventListener('popstate', function(e) {
 //  BOOT — detect initial URL
 // ============================================================
 (function boot() {
+  // Splash shows ONLY on the very first page load per browser session.
+  // Back/forward and all nav clicks never return to splash.
+  const alreadySeen = sessionStorage.getItem('pls_seen');
   const path = window.location.pathname.replace(/^\//, '') || '';
-  const startPage = (path === '' || path === 'index.html') ? 'splash' : path;
-  // Replace state with splash, then after render replace history with 'home'
-  // so the browser back button never returns to splash
+  let startPage;
+  if (!alreadySeen && (path === '' || path === 'index.html' || path === 'splash')) {
+    startPage = 'splash';
+    sessionStorage.setItem('pls_seen', '1');
+  } else {
+    startPage = (path === '' || path === 'index.html' || path === 'splash') ? 'home' : path;
+  }
   history.replaceState({ page: startPage }, '', window.location.href);
   nav(startPage, false);
-  if (startPage === 'splash') {
-    // Replace the history entry so back button skips splash entirely
-    history.replaceState({ page: 'home' }, '', window.location.href);
-  }
 })();
 </script>
 </body>
