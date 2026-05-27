@@ -1072,19 +1072,30 @@ img{max-width:100%;display:block}
       <!-- CONTACT FORM -->
       <div>
         <h2 style="margin-bottom:24px">Send Us a Message</h2>
-        <form onsubmit="handleContactForm(event)">
+        <!-- ================================================
+             FORMSPREE SETUP REQUIRED:
+             1. Go to formspree.io and create a free account
+             2. Click "New Form" and name it "Precision Laser Contact"
+             3. Copy your Form ID (looks like: xpzgkrdo)
+             4. Replace YOUR_FORMSPREE_ID below with your actual ID
+             ================================================ -->
+        <form id="contactForm"
+              action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+              method="POST"
+              enctype="multipart/form-data">
+
           <div class="form-row">
-            <div class="form-group"><label>First Name *</label><input type="text" placeholder="First name" required></div>
-            <div class="form-group"><label>Last Name *</label><input type="text" placeholder="Last name" required></div>
+            <div class="form-group"><label>First Name *</label><input type="text" name="first_name" placeholder="First name" required></div>
+            <div class="form-group"><label>Last Name *</label><input type="text" name="last_name" placeholder="Last name" required></div>
           </div>
-          <div class="form-group"><label>Company Name *</label><input type="text" placeholder="Your company name" required></div>
+          <div class="form-group"><label>Company Name *</label><input type="text" name="company" placeholder="Your company name" required></div>
           <div class="form-row">
-            <div class="form-group"><label>Phone Number *</label><input type="tel" placeholder="(000) 000-0000" required></div>
-            <div class="form-group"><label>Email Address *</label><input type="email" placeholder="your@email.com" required></div>
+            <div class="form-group"><label>Phone Number *</label><input type="tel" name="phone" placeholder="(000) 000-0000" required></div>
+            <div class="form-group"><label>Email Address *</label><input type="email" name="email" placeholder="your@email.com" required></div>
           </div>
           <div class="form-group">
             <label>Industry / Application</label>
-            <select>
+            <select name="industry">
               <option value="">Select an industry...</option>
               <option>Aerospace</option>
               <option>Automotive</option>
@@ -1103,8 +1114,22 @@ img{max-width:100%;display:block}
           </div>
           <div class="form-group">
             <label>Project Description *</label>
-            <textarea placeholder="Describe your project, surfaces to be cleaned, contamination type, estimated scope, timeline, and any other relevant details..." required></textarea>
+            <textarea name="message" placeholder="Describe your project, surfaces to be cleaned, contamination type, estimated scope, timeline, and any other relevant details..." required></textarea>
           </div>
+          <div class="form-group">
+            <label>Attach Photos or Files</label>
+            <div style="border:1.5px dashed var(--gray);border-radius:var(--radius);padding:18px;text-align:center;background:var(--offwhite);cursor:pointer;transition:border-color .2s" onclick="document.getElementById('fileInput').click()" id="dropZone">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6B7A99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 8px;display:block"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <p style="margin:0;font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:600;letter-spacing:.04em;color:var(--muted)">CLICK TO UPLOAD PHOTOS OR FILES</p>
+              <p style="margin:4px 0 0;font-size:.78rem;color:var(--muted)">JPG, PNG, PDF — up to 10MB per file — multiple files allowed</p>
+              <div id="fileNames" style="margin-top:10px;font-size:.82rem;color:var(--navy);font-weight:600"></div>
+            </div>
+            <input type="file" id="fileInput" name="attachment" multiple
+                   accept="image/*,.pdf,.doc,.docx"
+                   style="display:none"
+                   onchange="showFileNames(this)">
+          </div>
+
           <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
           <p id="form-success" style="display:none;color:#1F3A8F;font-weight:600;margin-top:14px;text-align:center;background:rgba(241,95,35,.1);padding:12px;border-radius:6px">
             ✅ Message sent! We'll be in touch within 1 business day.
@@ -1355,12 +1380,16 @@ function fadeIn() {
 // ============================================================
 //  CONTACT FORM
 // ============================================================
+function showFileNames(input) {
+  const names = Array.from(input.files).map(f => f.name).join(', ');
+  document.getElementById('fileNames').textContent = names ? '📎 ' + names : '';
+  document.getElementById('dropZone').style.borderColor = names ? 'var(--orange)' : '';
+}
+
 function handleContactForm(e) {
   e.preventDefault();
   document.getElementById('form-success').style.display = 'block';
-  e.target.querySelectorAll('input,textarea,select').forEach(el => el.disabled = true);
-  e.target.querySelector('button[type=submit]').textContent = '✓ Sent';
-  e.target.querySelector('button[type=submit]').disabled = true;
+  e.target.querySelectorAll('input,textarea,select,button').forEach(el => el.disabled = true);
 }
 
 // ============================================================
