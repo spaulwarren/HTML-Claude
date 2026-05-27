@@ -650,7 +650,7 @@ img{max-width:100%;display:block}
   <div class="footer-grid">
     <div class="footer-brand">
       <div onclick="nav('home')" style="cursor:pointer;display:inline-block">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 223 738 200" height="60" aria-label="Precision Laser Solutions">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612" height="60" aria-label="Precision Laser Solutions">
           <g fill="#ffffff">
             <path d="M255.22,252.97h44.642c6.985,0,9.414,4.107,9.414,11.109v20.791c0,5.508-3.541,10.642-10.932,10.642h-28.345v18.136h-14.78v-60.679ZM294.7,284.216v-19.39h-24.7v19.39h24.7Z"/>
             <path d="M318.582,313.648v-60.679h45.05c6.985,0,9.719,3.827,9.719,10.735v22.031c0,5.975-2.33,9.055-7.796,9.708l7.491,18.204h-14.78l-7.188-18.017h-17.715v18.017h-14.781ZM358.874,284.336v-19.23h-25.511v19.23h25.511Z"/>
@@ -710,7 +710,7 @@ img{max-width:100%;display:block}
     </ul></div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Precision Laser Solutions. All rights reserved.</span>
+    <span>© 2026 Precision Laser Solutions. All rights reserved.</span>
     <span>precisionlasersolutions.us</span>
   </div>
 </div></footer>
@@ -1118,16 +1118,16 @@ img{max-width:100%;display:block}
           </div>
           <div class="form-group">
             <label>Attach Photos or Files</label>
-            <div style="border:1.5px dashed var(--gray);border-radius:var(--radius);padding:18px;text-align:center;background:var(--offwhite);cursor:pointer;transition:border-color .2s" onclick="document.getElementById('fileInput').click()" id="dropZone">
+            <div style="border:1.5px dashed var(--gray);border-radius:var(--radius);padding:18px;text-align:center;background:var(--offwhite);cursor:pointer;transition:border-color .2s;position:relative" id="dropZone">
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6B7A99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 8px;display:block"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               <p style="margin:0;font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:600;letter-spacing:.04em;color:var(--muted)">CLICK TO UPLOAD PHOTOS OR FILES</p>
               <p style="margin:4px 0 0;font-size:.78rem;color:var(--muted)">JPG, PNG, PDF — up to 10MB per file — multiple files allowed</p>
               <div id="fileNames" style="margin-top:10px;font-size:.82rem;color:var(--navy);font-weight:600"></div>
+              <input type="file" name="attachment" multiple
+                     accept="image/*,.pdf,.doc,.docx"
+                     style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer"
+                     onchange="var n=Array.from(this.files).map(f=>f.name).join(', ');this.parentElement.querySelector('#fileNames').textContent=n?'📎 '+n:'';this.parentElement.style.borderColor=n?'var(--orange)':''">
             </div>
-            <input type="file" id="fileInput" name="attachment" multiple
-                   accept="image/*,.pdf,.doc,.docx"
-                   style="display:none"
-                   onchange="showFileNames(this)">
           </div>
 
           <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
@@ -1302,7 +1302,7 @@ function injectFooter(fragment) {
         <div class="footer-grid">
           <div class="footer-brand">
             <div onclick="nav('home')" style="cursor:pointer;display:inline-block">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 223 738 200" height="60" aria-label="Precision Laser Solutions">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612" height="60" aria-label="Precision Laser Solutions">
                 <g fill="#ffffff">
                   <path d="M255.22,252.97h44.642c6.985,0,9.414,4.107,9.414,11.109v20.791c0,5.508-3.541,10.642-10.932,10.642h-28.345v18.136h-14.78v-60.679ZM294.7,284.216v-19.39h-24.7v19.39h24.7Z"/>
                   <path d="M318.582,313.648v-60.679h45.05c6.985,0,9.719,3.827,9.719,10.735v22.031c0,5.975-2.33,9.055-7.796,9.708l7.491,18.204h-14.78l-7.188-18.017h-17.715v18.017h-14.781ZM358.874,284.336v-19.23h-25.511v19.23h25.511Z"/>
@@ -1362,7 +1362,7 @@ function injectFooter(fragment) {
           </ul></div>
         </div>
         <div class="footer-bottom">
-          <span>© 2025 Precision Laser Solutions. All rights reserved.</span>
+          <span>© 2026 Precision Laser Solutions. All rights reserved.</span>
           <span>precisionlasersolutions.us</span>
         </div>
       </div></footer>`;
