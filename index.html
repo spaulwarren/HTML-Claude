@@ -174,6 +174,7 @@ img{max-width:100%;display:block}
 .form-group input,.form-group textarea,.form-group select{width:100%;padding:11px 15px;border:1.5px solid var(--gray);border-radius:var(--radius);font-family:'Barlow',sans-serif;font-size:.95rem;color:var(--text);background:#fff;transition:border-color .2s;outline:none}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--orange)}
 .form-group textarea{resize:vertical;min-height:120px}
+.input-error{border-color:#c0392b!important;background:#fff8f8!important}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
 /* ---- CONTACT BLOCK ---- */
@@ -1167,9 +1168,9 @@ img{max-width:100%;display:block}
           <div id="form-success" style="display:none;margin-top:20px;padding:24px;border-radius:10px;background:#f0f7ff;border:2px solid #002D62;text-align:center">
             <div style="margin:0 auto 12px;width:72px;height:72px">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 188 197 232" width="72" height="72">
-                <rect x="17" y="188" width="197" height="232" fill="#002D62"/>
+                <rect x="17" y="188" width="197" height="232" fill="#f0f7ff"/>
                 <circle cx="114.534" cy="320.711" r="18.773" fill="#f15f23"/>
-                <polygon points="188.481 394.659 40.586 394.659 40.586 246.764 155.574 246.764 175.345 223.641 17.464 223.641 17.464 417.782 211.604 417.782 211.604 252.49 188.481 273.979 188.481 394.659" fill="#ffffff"/>
+                <polygon points="188.481 394.659 40.586 394.659 40.586 246.764 155.574 246.764 175.345 223.641 17.464 223.641 17.464 417.782 211.604 417.782 211.604 252.49 188.481 273.979 188.481 394.659" fill="#002D62"/>
                 <path d="M131.018,296.419c2.554,1.738,4.801,3.883,6.693,6.318l80.417-74.727v-33.769l-87.111,102.178Z" fill="#f15f23"/>
                 <path d="M90.506,337.55l-49.92,49.919v7.19h6.434l50.244-50.243c-2.61-1.907-4.898-4.221-6.758-6.866Z" fill="#f15f23"/>
               </svg>
@@ -1439,47 +1440,141 @@ function fadeIn() {
 // ============================================================
 //  CONTACT FORM
 // ============================================================
-function showFileNames(input) {
-  const names = Array.from(input.files).map(f => f.name).join(', ');
-  document.getElementById('fileNames').textContent = names ? '📎 ' + names : '';
+
+// Accumulated files across multiple selections/drops
+var allFiles = [];
+
+function updateFileDisplay() {
+  var z = document.getElementById('dropZone');
+  var fileNames = document.getElementById('fileNames');
+  var dropText = document.getElementById('dropText');
+  if (!z) return;
+  if (allFiles.length) {
+    var display = allFiles.map(function(f){ return '📎 ' + f.name; }).join('<br>');
+    if (fileNames) fileNames.innerHTML = display;
+    if (dropText) dropText.textContent = allFiles.length + ' file' + (allFiles.length > 1 ? 's' : '') + ' selected — drag more to add';
+    z.style.borderColor = 'var(--orange)';
+    z.style.background = 'rgba(241,95,35,.04)';
+    z.dataset.selected = '1';
+    // Sync to file input
+    try {
+      var dt = new DataTransfer();
+      allFiles.forEach(function(f){ dt.items.add(f); });
+      var fi = document.getElementById('fileInput');
+      if (fi) fi.files = dt.files;
+    } catch(e){}
+  } else {
+    if (fileNames) fileNames.innerHTML = '';
+    if (dropText) dropText.textContent = 'ontouchstart' in window ? 'TAP TO ATTACH PHOTOS OR FILES' : 'DRAG & DROP FILES HERE';
+    z.style.borderColor = 'var(--gray)';
+    z.style.background = 'var(--offwhite)';
+    z.dataset.selected = '';
+  }
 }
 
 function handleFileSelect(files) {
-  var z = document.getElementById('dropZone');
-  var names = Array.from(files).map(function(f){ return f.name; });
-  var display = names.length ? '📎 ' + names.join('<br>📎 ') : '';
-  document.getElementById('fileNames').innerHTML = display;
-  document.getElementById('dropText').textContent = names.length ? names.length + ' file(s) selected' : 'DRAG & DROP FILES HERE';
-  z.style.borderColor = names.length ? 'var(--orange)' : 'var(--gray)';
-  z.style.background = names.length ? 'rgba(241,95,35,.04)' : 'var(--offwhite)';
-  z.dataset.selected = names.length ? '1' : '';
-  // sync files to the hidden input
-  try {
-    var dt = new DataTransfer();
-    Array.from(files).forEach(function(f){ dt.items.add(f); });
-    document.getElementById('fileInput').files = dt.files;
-  } catch(e){}
+  // Add new files to accumulated list, avoid duplicates by name+size
+  Array.from(files).forEach(function(f) {
+    var exists = allFiles.some(function(e){ return e.name === f.name && e.size === f.size; });
+    if (!exists) allFiles.push(f);
+  });
+  updateFileDisplay();
+}
+
+function showFileNames(input) {
+  handleFileSelect(input.files);
+}
+
+// Phone auto-format to (XXX) XXX-XXXX
+function formatPhone(input) {
+  var digits = input.value.replace(/\D/g, '').slice(0, 10);
+  var formatted = '';
+  if (digits.length > 0) formatted = '(' + digits.slice(0, 3);
+  if (digits.length >= 4) formatted += ') ' + digits.slice(3, 6);
+  if (digits.length >= 7) formatted += '-' + digits.slice(6, 10);
+  input.value = formatted;
+}
+
+// Form validation
+function validateForm(form) {
+  var errors = [];
+  var fields = {
+    'first_name': 'First name',
+    'last_name':  'Last name',
+    'company':    'Company name',
+    'phone':      'Phone number',
+    'email':      'Email address',
+    'message':    'Project description'
+  };
+
+  // Clear previous errors
+  form.querySelectorAll('.field-error').forEach(function(e){ e.remove(); });
+  form.querySelectorAll('.input-error').forEach(function(e){ e.classList.remove('input-error'); });
+
+  var firstError = null;
+
+  Object.keys(fields).forEach(function(name) {
+    var el = form.querySelector('[name="' + name + '"]');
+    if (!el) return;
+    var val = el.value.trim();
+    var err = null;
+
+    if (!val) {
+      err = fields[name] + ' is required';
+    } else if (name === 'email') {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) err = 'Please enter a valid email address';
+    } else if (name === 'phone') {
+      var digits = val.replace(/\D/g, '');
+      if (digits.length < 10) err = 'Please enter a valid 10-digit US phone number';
+    }
+
+    if (err) {
+      el.classList.add('input-error');
+      var msg = document.createElement('div');
+      msg.className = 'field-error';
+      msg.style.cssText = 'color:#c0392b;font-size:.78rem;margin-top:4px;font-weight:600';
+      msg.textContent = '⚠ ' + err;
+      el.parentNode.appendChild(msg);
+      errors.push(err);
+      if (!firstError) firstError = el;
+    }
+  });
+
+  if (firstError) firstError.focus();
+  return errors.length === 0;
 }
 
 // Set up drag and drop on the drop zone after it renders
 document.addEventListener('DOMContentLoaded', function() {
-  // Detect touch device — show tap-friendly text on mobile
+  // Detect touch device
   if ('ontouchstart' in window) {
     var dt = document.getElementById('dropText');
     if (dt) dt.textContent = 'TAP TO ATTACH PHOTOS OR FILES';
   }
 
+  // Phone formatting — attach to phone input
+  function initPhoneFormat() {
+    var phone = document.querySelector('[name="phone"]');
+    if (phone && !phone._phoneBound) {
+      phone._phoneBound = true;
+      phone.addEventListener('input', function(){ formatPhone(this); });
+      phone.setAttribute('placeholder', '(916) 555-1234');
+      phone.setAttribute('maxlength', '14');
+    }
+  }
+
   // Drag and drop setup
   function initDropZone() {
     var zone = document.getElementById('dropZone');
-    if (!zone) return;
+    if (!zone || zone._dropBound) return;
+    zone._dropBound = true;
     zone.addEventListener('dragover', function(e) {
       e.preventDefault();
       zone.style.borderColor = 'var(--orange)';
       zone.style.background = 'rgba(241,95,35,.06)';
       zone.style.transform = 'scale(1.01)';
     });
-    zone.addEventListener('dragleave', function(e) {
+    zone.addEventListener('dragleave', function() {
       zone.style.borderColor = zone.dataset.selected ? 'var(--orange)' : 'var(--gray)';
       zone.style.background = zone.dataset.selected ? 'rgba(241,95,35,.04)' : 'var(--offwhite)';
       zone.style.transform = 'scale(1)';
@@ -1487,18 +1582,20 @@ document.addEventListener('DOMContentLoaded', function() {
     zone.addEventListener('drop', function(e) {
       e.preventDefault();
       zone.style.transform = 'scale(1)';
-      var files = e.dataTransfer.files;
-      if (files.length) handleFileSelect(files);
+      if (e.dataTransfer.files.length) handleFileSelect(e.dataTransfer.files);
     });
+    initPhoneFormat();
   }
 
-  // Init immediately and also after any nav (SPA re-render)
   initDropZone();
+  initPhoneFormat();
+
   var origNav = window.nav;
   if (origNav) {
     window.nav = function(page, push) {
       origNav(page, push);
-      setTimeout(initDropZone, 300);
+      allFiles = []; // reset files on page change
+      setTimeout(function(){ initDropZone(); initPhoneFormat(); }, 400);
     };
   }
 });
@@ -1513,6 +1610,9 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       e.stopPropagation();
+
+      // Validate first
+      if (!validateForm(form)) return;
 
       var btn = form.querySelector('button[type=submit]');
       btn.textContent = 'Sending...';
