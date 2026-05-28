@@ -1092,6 +1092,7 @@ img{max-width:100%;display:block}
         <form id="contactForm"
               name="contact"
               method="POST"
+              action="/"
               enctype="multipart/form-data"
               data-netlify="true"
               data-netlify-honeypot="bot-field">
@@ -1428,20 +1429,23 @@ document.addEventListener('DOMContentLoaded', function() {
     var data = new FormData(form);
     fetch('/', {
       method: 'POST',
-      headers: { 'Accept': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString()
+      body: data
     })
-    .then(function() {
-      document.getElementById('form-success').style.display = 'block';
-      form.reset();
-      document.getElementById('fileNames').textContent = '';
-      document.getElementById('dropZone').style.borderColor = 'var(--gray)';
-      btn.textContent = '✓ Sent';
+    .then(function(response) {
+      if (response.ok) {
+        document.getElementById('form-success').style.display = 'block';
+        form.reset();
+        document.getElementById('fileNames').textContent = '';
+        document.getElementById('dropZone').style.borderColor = 'var(--gray)';
+        btn.textContent = '✓ Sent';
+      } else {
+        throw new Error('Network response was not ok');
+      }
     })
     .catch(function() {
       btn.textContent = 'Send Message';
       btn.disabled = false;
-      alert('Something went wrong. Please try again or email us directly.');
+      alert('Something went wrong. Please try again or email us directly at info@precisionlasersolutions.us');
     });
   });
 });
