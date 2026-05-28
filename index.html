@@ -13,8 +13,8 @@
    ============================================================ */
 :root{
   --navy:#000000;--navy2:#111111;--orange:#5BC8E8;--orange2:#3db5d6;
-  --white:#fff;--offwhite:#F5F6F8;--gray:#E2E5EC;--muted:#C8CDD0;
-  --text:#2C3A52;--radius:6px;
+  --white:#fff;--offwhite:#F5F6F8;--gray:#E2E5EC;--muted:#555555;
+  --text:#000000;--radius:6px;
   --shadow:0 4px 24px rgba(0,0,0,.10);
   --shadow-lg:0 10px 44px rgba(0,0,0,.18);
 }
@@ -26,8 +26,8 @@ h1{font-size:clamp(2rem,5vw,3.4rem)}
 h2{font-size:clamp(1.6rem,3.5vw,2.4rem)}
 h3{font-size:clamp(1.1rem,2vw,1.5rem)}
 p{margin-bottom:1rem;color:var(--text)}
-a{color:var(--orange);text-decoration:none;cursor:pointer}
-a:hover{color:var(--orange2)}
+a{color:#000000;text-decoration:none;cursor:pointer}
+a:hover{color:#333333}
 img{max-width:100%;display:block}
 
 /* ---- LAYOUT ---- */
@@ -97,7 +97,7 @@ img{max-width:100%;display:block}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(0,0,0,.04) 0%,transparent 60%);pointer-events:none}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:56px}
 .hero-text h1{color:var(--navy);margin-bottom:18px}
-.hero-text h1 span{color:var(--orange)}
+.hero-text h1 span{color:#000000;font-style:italic}
 .hero-text p{color:var(--muted);font-size:1.1rem;margin-bottom:28px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 .hero-photo-area{
@@ -152,11 +152,11 @@ img{max-width:100%;display:block}
 .item-card-body{padding:16px 18px}
 .item-card-body h3{font-size:1rem;margin-bottom:5px;color:var(--navy)}
 .item-card-body p{font-size:.84rem;color:var(--muted);margin:0}
-.item-card-arrow{float:right;color:var(--orange);font-size:1.1rem;margin-top:-2px}
+.item-card-arrow{float:right;color:#000000;font-size:1.1rem;margin-top:-2px}
 
 /* ---- WHY ITEMS ---- */
 .why-item{display:flex;gap:18px;align-items:flex-start}
-.why-icon{width:50px;height:50px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.why-icon{width:50px;height:50px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem}
 .why-icon svg{width:26px;height:26px}
 .why-item h3{font-size:1.05rem;margin-bottom:6px;color:#fff}
 .why-item p{font-size:.88rem;color:rgba(255,255,255,.7);margin:0}
@@ -180,7 +180,7 @@ img{max-width:100%;display:block}
 /* ---- CONTACT BLOCK ---- */
 .contact-item{display:flex;align-items:flex-start;gap:16px;padding:18px 0;border-bottom:1px solid var(--gray)}
 .contact-item:last-child{border-bottom:none}
-.ci-icon{width:44px;height:44px;border-radius:50%;background:rgba(91,200,232,.1);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.ci-icon{width:44px;height:44px;border-radius:50%;background:#E2E5EC;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
 .ci-label{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:2px}
 .ci-val{font-size:1.02rem;color:var(--text)}
 
@@ -212,10 +212,10 @@ img{max-width:100%;display:block}
   display:inline-flex;align-items:center;gap:6px;
   font-family:'Barlow Condensed',sans-serif;font-weight:700;
   font-size:.88rem;letter-spacing:.07em;text-transform:uppercase;
-  color:var(--orange);cursor:pointer;margin-bottom:24px;
+  color:#000000;cursor:pointer;margin-bottom:24px;
   background:none;border:none;padding:0
 }
-.back-btn:hover{color:var(--orange2)}
+.back-btn:hover{color:#333333}
 .back-btn svg{width:16px;height:16px}
 
 /* ---- CTA BANNER ---- */
@@ -616,18 +616,18 @@ img{max-width:100%;display:block}
       <div class="line"></div>
     </div>
     <div class="g4">
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19c-3.5 0-6.5-1.5-8-4l1.5-3 3 1 1-3h5l1 3 3-1 1.5 3c-1.5 2.5-4.5 4-8 4z"/><path d="M8 6l4-3 4 3"/><path d="M8 6v4m8-4v4"/><circle cx="12" cy="10" r="1" fill="#5BC8E8" stroke="none"/></svg></div><h3>Aerospace</h3><p>Precision surface prep for critical components</p></div>
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10" width="20" height="7" rx="2"/><path d="M6 17v2m12-2v2"/><path d="M2 13h20"/><circle cx="6.5" cy="19.5" r="1.5" fill="#5BC8E8" stroke="none"/><circle cx="17.5" cy="19.5" r="1.5" fill="#5BC8E8" stroke="none"/><path d="M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3"/></svg></div><h3>Automotive</h3><p>Rust &amp; paint removal on vehicle parts</p></div>
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17c2-3 4-4 9-4s7 1 9 4"/><path d="M3 17v2h18v-2"/><path d="M12 5v8"/><path d="M8 9l4-4 4 4"/><path d="M6 13c0-1 .5-2 1-2.5"/><path d="M18 13c0-1-.5-2-1-2.5"/><circle cx="12" cy="4" r="1.5" fill="#5BC8E8" stroke="none"/></svg></div><h3>Marine</h3><p>Hull prep &amp; corrosion removal</p></div>
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><rect x="10" y="9" width="4" height="4" rx=".5" fill="#5BC8E8" stroke="none"/></svg></div><h3>Structural Steel</h3><p>Bridge &amp; infrastructure surface treatment</p></div>
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/><path d="M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/><circle cx="12" cy="12" r="1" fill="#5BC8E8" stroke="none"/></svg></div><h3>Manufacturing</h3><p>Mold cleaning, tooling &amp; equipment preparation</p></div>
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="7" rx="5" ry="3"/><path d="M7 7v5c0 1.66 2.24 3 5 3s5-1.34 5-3V7"/><path d="M7 12v5c0 1.66 2.24 3 5 3s5-1.34 5-3v-5"/><circle cx="12" cy="7" r="1.2" fill="#5BC8E8" stroke="none"/></svg></div><h3>Oil &amp; Gas</h3><p>Pipeline &amp; equipment decontamination</p></div>
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9"/><path d="M19 21V9"/><path d="M3 9h18"/><path d="M9 9V5h6v4"/><path d="M9 21v-5h6v5"/><rect x="10.5" y="12" width="3" height="3" rx=".5" fill="#5BC8E8" stroke="none"/></svg></div><h3>Historical Restoration</h3><p>Delicate surface cleaning for historic assets</p></div>
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="rgba(0,0,0,.1)" stroke="#000000"/><circle cx="12" cy="12" r="1.5" fill="#5BC8E8" stroke="none"/></svg></div><h3>Power Generation</h3><p>Turbine &amp; generator component cleaning</p></div>
-      <div class="svc-card" onclick="nav('service-wood')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 6c0 0 3 2 6 2s6-2 9-2"/><path d="M3 18c0 0 3-2 6-2s6 2 9 2"/><circle cx="12" cy="12" r="1.5" fill="#5BC8E8" stroke="none"/></svg></div><h3>Wood Restoration</h3><p>Paint &amp; coating removal from fine wood</p></div>
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><rect x="5" y="13" width="4" height="8"/><rect x="10" y="9" width="4" height="12"/><rect x="15" y="5" width="4" height="16"/><rect x="11" y="10" width="2" height="2" fill="#5BC8E8" stroke="none"/></svg></div><h3>Heavy Industry</h3><p>Large-scale industrial operations</p></div>
-      <div class="svc-card" onclick="nav('services')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(0,0,0,.08)"/><path d="M9 12l2 2 4-4" stroke="#5BC8E8" stroke-width="2"/></svg></div><h3>Defense</h3><p>Military equipment maintenance &amp; prep</p></div>
-      <div class="svc-card" onclick="nav('service-agricultural')"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 7 10 5 6c4 0 7 2 7 6z" fill="rgba(0,0,0,.08)"/><path d="M12 12C12 12 17 10 19 6c-4 0-7 2-7 6z" fill="rgba(0,0,0,.08)"/><path d="M5 22h14"/><path d="M8 16c0 0 1 2 4 2s4-2 4-2" stroke="#5BC8E8" stroke-width="1.8"/></svg></div><h3>Agricultural</h3><p>Equipment &amp; machinery surface cleaning</p></div>
+      <div class="svc-card" onclick="nav('services')"><div class="icon" style="font-size:1.6rem">✈</div><h3>Aerospace</h3><p>Precision surface prep for critical components</p></div>
+      <div class="svc-card" onclick="nav('services')"><div class="icon" style="font-size:1.6rem">🚗</div><h3>Automotive</h3><p>Rust &amp; paint removal on vehicle parts</p></div>
+      <div class="svc-card" onclick="nav('services')"><div class="icon" style="font-size:1.6rem">⚓</div><h3>Marine</h3><p>Hull prep &amp; corrosion removal</p></div>
+      <div class="svc-card" onclick="nav('services')"><div class="icon" style="font-size:1.6rem">🏗</div><h3>Structural Steel</h3><p>Bridge &amp; infrastructure surface treatment</p></div>
+      <div class="svc-card" onclick="nav('services')"><div class="icon" style="font-size:1.6rem">⚙</div><h3>Manufacturing</h3><p>Mold cleaning, tooling &amp; equipment preparation</p></div>
+      <div class="svc-card" onclick="nav('services')"><div class="icon" style="font-size:1.6rem">🛢</div><h3>Oil &amp; Gas</h3><p>Pipeline &amp; equipment decontamination</p></div>
+      <div class="svc-card" onclick="nav('service-historical')"><div class="icon" style="font-size:1.6rem">🏛</div><h3>Historical Restoration</h3><p>Delicate surface cleaning for historic assets</p></div>
+      <div class="svc-card" onclick="nav('service-power')"><div class="icon" style="font-size:1.6rem">⚡</div><h3>Power Generation</h3><p>Turbine &amp; generator component cleaning</p></div>
+      <div class="svc-card" onclick="nav('service-wood')"><div class="icon" style="font-size:1.6rem">🪵</div><h3>Wood Restoration</h3><p>Paint &amp; coating removal from fine wood</p></div>
+      <div class="svc-card" onclick="nav('services')"><div class="icon" style="font-size:1.6rem">🏭</div><h3>Heavy Industry</h3><p>Large-scale industrial operations</p></div>
+      <div class="svc-card" onclick="nav('service-defense')"><div class="icon" style="font-size:1.6rem">🛡</div><h3>Defense</h3><p>Military equipment maintenance &amp; preparation</p></div>
+      <div class="svc-card" onclick="nav('service-agricultural')"><div class="icon" style="font-size:1.6rem">🌾</div><h3>Agricultural</h3><p>Equipment &amp; machinery surface cleaning</p></div>
     </div>
     <div style="text-align:center;margin-top:40px">
       <button class="btn btn-outline-dark" onclick="nav('services')">View All Services</button>
@@ -643,12 +643,12 @@ img{max-width:100%;display:block}
       <div class="line"></div>
     </div>
     <div class="g3">
-      <div class="why-item"><div class="why-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5BC8E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg></div><div><h3>Pinpoint Precision</h3><p>Target only the contaminant layer without damaging the substrate. Perfect for delicate or high-value components.</p></div></div>
-      <div class="why-item"><div class="why-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5BC8E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 4 6 4 10c0 5 8 12 8 12s8-7 8-12c0-4-4-8-8-8z"/><circle cx="12" cy="10" r="2.5" fill="rgba(91,200,232,.2)"/></svg></div><div><h3>Zero Chemicals</h3><p>No solvents, no blasting media, no hazardous waste — fully compliant with environmental regulations.</p></div></div>
-      <div class="why-item"><div class="why-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5BC8E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><h3>Faster Throughput</h3><p>Dramatically reduce downtime compared to traditional methods. Automated options available for production lines.</p></div></div>
-      <div class="why-item"><div class="why-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5BC8E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/><circle cx="12" cy="16" r="1.2" fill="#5BC8E8"/></svg></div><div><h3>Surface Integrity</h3><p>Non-abrasive process preserves tight tolerances and base material properties every time.</p></div></div>
-      <div class="why-item"><div class="why-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5BC8E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><path d="M6 6l12 12M18 6L6 18" stroke-width="1.2" stroke-dasharray="2 2"/><circle cx="12" cy="12" r="4"/></svg></div><div><h3>Lower Total Cost</h3><p>Eliminate consumable costs, waste disposal fees, and re-work. ROI is rapid across virtually every application.</p></div></div>
-      <div class="why-item"><div class="why-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5BC8E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-4 9-8 10C8 21 4 17 4 12V6l8-4z" fill="rgba(91,200,232,.1)"/><path d="M9 12l2 2 4-4" stroke="#5BC8E8" stroke-width="2"/></svg></div><div><h3>Safer for Operators</h3><p>No toxic vapors, no high-pressure abrasives. Laser cleaning is among the safest surface prep methods available.</p></div></div>
+      <div class="why-item"><div class="why-icon" style="font-size:1.4rem">🎯</div><div><h3>Pinpoint Precision</h3><p>Target only the contaminant layer without damaging the substrate. Perfect for delicate or high-value components.</p></div></div>
+      <div class="why-item"><div class="why-icon" style="font-size:1.4rem">🌿</div><div><h3>Zero Chemicals</h3><p>No solvents, no blasting media, no hazardous waste — fully compliant with environmental regulations.</p></div></div>
+      <div class="why-item"><div class="why-icon" style="font-size:1.4rem">⚡</div><div><h3>Faster Throughput</h3><p>Dramatically reduce downtime compared to traditional methods. Automated options available for production lines.</p></div></div>
+      <div class="why-item"><div class="why-icon" style="font-size:1.4rem">🔒</div><div><h3>Surface Integrity</h3><p>Non-abrasive process preserves tight tolerances and base material properties every time.</p></div></div>
+      <div class="why-item"><div class="why-icon" style="font-size:1.4rem">💰</div><div><h3>Lower Total Cost</h3><p>Eliminate consumable costs, waste disposal fees, and re-work. ROI is rapid across virtually every application.</p></div></div>
+      <div class="why-item"><div class="why-icon" style="font-size:1.4rem">🛡</div><div><h3>Safer for Operators</h3><p>No toxic vapors, no high-pressure abrasives. Laser cleaning is among the safest surface prep methods available.</p></div></div>
     </div>
   </div>
 </section>
@@ -736,7 +736,7 @@ img{max-width:100%;display:block}
       <li><a onclick="nav('contact')">Contact</a></li>
     </ul></div>
     <div class="footer-col"><h4>Contact</h4><ul>
-      <li><a href="tel:+19169192850">📞 (916) 919-2850</a></li>
+      <li><a href="tel:+19169192850">☎ (916) 919-2850</a></li>
       <li><a href="mailto:info@precisionlasersolutions.us" style="white-space:nowrap">✉ info@precisionlasersolutions.us</a></li>
       <li>📍 Sacramento, California</li>
     </ul></div>
@@ -1155,7 +1155,7 @@ img{max-width:100%;display:block}
                  onclick="document.getElementById('fileInput').click()">
               <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="##C8CDD0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px;display:block"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               <p style="margin:0;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.05em;color:var(--navy)" id="dropText">DRAG &amp; DROP FILES HERE</p>
-              <p style="margin:6px 0 0;font-size:.82rem;color:var(--muted)">or <span style="color:var(--orange);font-weight:600;text-decoration:underline">click to browse</span> — JPG, PNG, PDF up to 10MB each</p>
+              <p style="margin:6px 0 0;font-size:.82rem;color:var(--muted)">or <span style="color:#000000;font-weight:600;text-decoration:underline">click to browse</span> — JPG, PNG, PDF up to 10MB each</p>
               <div id="fileNames" style="margin-top:10px;font-size:.84rem;color:var(--navy);font-weight:600;line-height:1.6"></div>
             </div>
             <input type="file" id="fileInput" name="attachment" multiple
@@ -1177,7 +1177,7 @@ img{max-width:100%;display:block}
             </div>
             <h3 style="color:#000000;margin-bottom:8px;font-size:1.3rem">Message Received!</h3>
             <p style="color:#000000;margin:0;font-size:.95rem">Thank you for contacting Precision Laser Solutions. We have received your message and will respond within <strong>1 business day</strong>.</p>
-            <p style="color:var(--muted);margin:10px 0 0;font-size:.85rem">For urgent inquiries call us directly at <a href="tel:+19169192850" style="color:var(--orange);font-weight:600">(916) 919-2850</a></p>
+            <p style="color:var(--muted);margin:10px 0 0;font-size:.85rem">For urgent inquiries call us directly at <a href="tel:+19169192850" style="color:#000000;font-weight:600">(916) 919-2850</a></p>
           </div>
         </form>
       </div>
@@ -1186,19 +1186,19 @@ img{max-width:100%;display:block}
       <div>
         <h2 style="margin-bottom:24px">Get in Touch</h2>
         <div class="contact-item">
-          <div class="ci-icon">📞</div>
+          <div class="ci-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
           <div><div class="ci-label">Phone</div><div class="ci-val"><a href="tel:+19169192850">(916) 919-2850</a></div></div>
         </div>
         <div class="contact-item">
-          <div class="ci-icon">✉️</div>
+          <div class="ci-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
           <div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:info@precisionlasersolutions.us">info@precisionlasersolutions.us</a></div></div>
         </div>
         <div class="contact-item">
-          <div class="ci-icon">📍</div>
+          <div class="ci-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div><div class="ci-label">Location</div><div class="ci-val">Sacramento, California</div></div>
         </div>
         <div class="contact-item">
-          <div class="ci-icon">🕐</div>
+          <div class="ci-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
           <div><div class="ci-label">Business Hours</div><div class="ci-val">Mon – Fri: 8:00 AM – 5:00 PM<br>Emergency service available</div></div>
         </div>
 
@@ -1416,7 +1416,7 @@ function injectFooter(fragment) {
             <li><a onclick="nav('contact')">Contact</a></li>
           </ul></div>
           <div class="footer-col"><h4>Contact</h4><ul>
-            <li><a href="tel:+19169192850">📞 (916) 919-2850</a></li>
+            <li><a href="tel:+19169192850">☎ (916) 919-2850</a></li>
             <li><a href="mailto:info@precisionlasersolutions.us" style="white-space:nowrap">✉ info@precisionlasersolutions.us</a></li>
             <li>📍 Sacramento, California</li>
           </ul></div>
