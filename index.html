@@ -321,6 +321,20 @@ img{max-width:100%;display:block}
 </head>
 <body>
 
+<!-- Hidden static form for Netlify form detection — do not remove -->
+<form name="contact" netlify netlify-honeypot="bot-field" enctype="multipart/form-data" style="display:none">
+  <input type="text" name="first_name">
+  <input type="text" name="last_name">
+  <input type="text" name="company">
+  <input type="tel" name="phone">
+  <input type="email" name="email">
+  <select name="industry"></select>
+  <textarea name="message"></textarea>
+  <input type="file" name="attachment">
+  <input type="hidden" name="subject">
+  <input name="bot-field">
+</form>
+
 <!-- =====================================================
      SVG SYMBOL DEFS — logo reused via <use href="#logo-white">
      ===================================================== -->
@@ -1151,7 +1165,15 @@ img{max-width:100%;display:block}
 
           <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
           <div id="form-success" style="display:none;margin-top:20px;padding:24px;border-radius:10px;background:#f0f7ff;border:2px solid #002D62;text-align:center">
-            <div style="font-size:2.5rem;margin-bottom:8px">✅</div>
+            <div style="margin:0 auto 12px;width:72px;height:72px">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 188 197 232" width="72" height="72">
+                <rect x="17" y="188" width="197" height="232" fill="#002D62"/>
+                <circle cx="114.534" cy="320.711" r="18.773" fill="#f15f23"/>
+                <polygon points="188.481 394.659 40.586 394.659 40.586 246.764 155.574 246.764 175.345 223.641 17.464 223.641 17.464 417.782 211.604 417.782 211.604 252.49 188.481 273.979 188.481 394.659" fill="#ffffff"/>
+                <path d="M131.018,296.419c2.554,1.738,4.801,3.883,6.693,6.318l80.417-74.727v-33.769l-87.111,102.178Z" fill="#f15f23"/>
+                <path d="M90.506,337.55l-49.92,49.919v7.19h6.434l50.244-50.243c-2.61-1.907-4.898-4.221-6.758-6.866Z" fill="#f15f23"/>
+              </svg>
+            </div>
             <h3 style="color:#002D62;margin-bottom:8px;font-size:1.3rem">Message Received!</h3>
             <p style="color:#002D62;margin:0;font-size:.95rem">Thank you for contacting Precision Laser Solutions. We have received your message and will respond within <strong>1 business day</strong>.</p>
             <p style="color:var(--muted);margin:10px 0 0;font-size:.85rem">For urgent inquiries call us directly at <a href="tel:+19169192850" style="color:var(--orange);font-weight:600">(916) 919-2850</a></p>
@@ -1500,7 +1522,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       fetch('/', {
         method: 'POST',
-        body: data
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
       })
       .then(function(response) {
         if (response.ok || response.redirected) {
