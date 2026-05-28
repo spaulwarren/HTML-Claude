@@ -1092,10 +1092,10 @@ img{max-width:100%;display:block}
         <form id="contactForm"
               name="contact"
               method="POST"
-              action="/"
               enctype="multipart/form-data"
               data-netlify="true"
-              data-netlify-honeypot="bot-field">
+              data-netlify-honeypot="bot-field"
+              data-netlify-recaptcha="false">
 
           <input type="hidden" name="form-name" value="contact">
           <input type="hidden" name="subject" value="New Project Inquiry — Precision Laser Solutions">
@@ -1483,35 +1483,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Netlify Forms submission handler
 document.addEventListener('DOMContentLoaded', function() {
-  var form = document.getElementById('contactForm');
-  if (!form) return;
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var btn = form.querySelector('button[type=submit]');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-    var data = new FormData(form);
-    fetch('/', {
-      method: 'POST',
-      body: data
-    })
-    .then(function(response) {
-      if (response.ok) {
-        document.getElementById('form-success').style.display = 'block';
-        form.reset();
-        document.getElementById('fileNames').textContent = '';
-        document.getElementById('dropZone').style.borderColor = 'var(--gray)';
-        btn.textContent = '✓ Sent';
-      } else {
-        throw new Error('Network response was not ok');
-      }
-    })
-    .catch(function() {
-      btn.textContent = 'Send Message';
-      btn.disabled = false;
-      alert('Something went wrong. Please try again or email us directly at info@precisionlasersolutions.us');
+  function initForm() {
+    var form = document.getElementById('contactForm');
+    if (!form || form._netlifyBound) return;
+    form._netlifyBound = true;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var btn = form.querySelector('button[type=submit]');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      var data = new FormData(form);
+
+      fetch('/', {
+        method: 'POST',
+        body: data
+      })
+      .then(function(response) {
+        if (response.ok || response.redirected) {
+          // Show success message
+          var success = document.getElementById('form-success');
+          if (success) {
+            success.style.display = 'block';
+            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          form.reset();
+          var fileNames = document.getElementById('fileNames');
+          var dropZone = document.getElementById('dropZone');
+          var dropText = document.getElementById('dropText');
+          if (fileNames) fileNames.innerHTML = '';
+          if (dropZone) { dropZone.style.borderColor = 'var(--gray)'; dropZone.style.background = 'var(--offwhite)'; dropZone.dataset.selected = ''; }
+          if (dropText) dropText.textContent = 'DRAG & DROP FILES HERE';
+          btn.textContent = '✓ Sent';
+        } else {
+          throw new Error('Submission failed');
+        }
+      })
+      .catch(function(err) {
+        console.error(err);
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        alert('Something went wrong. Please email us directly at info@precisionlasersolutions.us or call (916) 919-2850');
+      });
     });
-  });
+  }
+
+  initForm();
+  // Re-init after SPA navigation to contact page
+  var _origNav = window.nav;
+  if (_origNav) {
+    window.nav = function(page, push) {
+      _origNav(page, push);
+      setTimeout(initForm, 400);
+    };
+  }
 });
 
 // ============================================================
