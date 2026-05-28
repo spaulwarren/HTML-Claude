@@ -1135,22 +1135,27 @@ img{max-width:100%;display:block}
           </div>
           <div class="form-group">
             <label>Attach Photos or Files</label>
-            <div id="dropZone" style="border:1.5px dashed var(--gray);border-radius:var(--radius);padding:18px 18px 14px;text-align:center;background:var(--offwhite);cursor:pointer;transition:all .3s;min-height:90px" onclick="document.getElementById('fileInput').click()" onmouseenter="this.style.padding='24px 18px 20px';this.style.borderColor='var(--orange)'" onmouseleave="this.style.padding='18px 18px 14px';this.style.borderColor=this.dataset.selected?'var(--orange)':'var(--gray)'">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6B7A99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 8px;display:block"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              <p style="margin:0;font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:600;letter-spacing:.04em;color:var(--muted)">CLICK TO UPLOAD PHOTOS OR FILES</p>
-              <p style="margin:4px 0 0;font-size:.78rem;color:var(--muted)">JPG, PNG, PDF — up to 10MB per file — multiple files allowed</p>
-              <div id="fileNames" style="margin-top:8px;font-size:.82rem;color:var(--navy);font-weight:600"></div>
+            <div id="dropZone"
+                 style="border:2px dashed var(--gray);border-radius:var(--radius);padding:28px 18px;text-align:center;background:var(--offwhite);cursor:pointer;transition:all .25s;position:relative"
+                 onclick="document.getElementById('fileInput').click()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#6B7A99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px;display:block"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <p style="margin:0;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.05em;color:var(--navy)" id="dropText">DRAG &amp; DROP FILES HERE</p>
+              <p style="margin:6px 0 0;font-size:.82rem;color:var(--muted)">or <span style="color:var(--orange);font-weight:600;text-decoration:underline">click to browse</span> — JPG, PNG, PDF up to 10MB each</p>
+              <div id="fileNames" style="margin-top:10px;font-size:.84rem;color:var(--navy);font-weight:600;line-height:1.6"></div>
             </div>
             <input type="file" id="fileInput" name="attachment" multiple
                    accept="image/*,.pdf,.doc,.docx"
                    style="display:none"
-                   onchange="var z=document.getElementById('dropZone');var n=Array.from(this.files).map(f=>f.name).join(', ');document.getElementById('fileNames').textContent=n?'📎 '+n:'';z.style.borderColor=n?'var(--orange)':'var(--gray)';z.dataset.selected=n?'1':'';">
+                   onchange="handleFileSelect(this.files)">
           </div>
 
           <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
-          <p id="form-success" style="display:none;color:#002D62;font-weight:600;margin-top:14px;text-align:center;background:rgba(241,95,35,.1);padding:12px;border-radius:6px">
-            ✅ Message sent! We'll be in touch within 1 business day.
-          </p>
+          <div id="form-success" style="display:none;margin-top:20px;padding:24px;border-radius:10px;background:#f0f7ff;border:2px solid #002D62;text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:8px">✅</div>
+            <h3 style="color:#002D62;margin-bottom:8px;font-size:1.3rem">Message Received!</h3>
+            <p style="color:#002D62;margin:0;font-size:.95rem">Thank you for contacting Precision Laser Solutions. We have received your message and will respond within <strong>1 business day</strong>.</p>
+            <p style="color:var(--muted);margin:10px 0 0;font-size:.85rem">For urgent inquiries call us directly at <a href="tel:+19169192850" style="color:var(--orange);font-weight:600">(916) 919-2850</a></p>
+          </div>
         </form>
       </div>
 
@@ -1416,6 +1421,65 @@ function showFileNames(input) {
   const names = Array.from(input.files).map(f => f.name).join(', ');
   document.getElementById('fileNames').textContent = names ? '📎 ' + names : '';
 }
+
+function handleFileSelect(files) {
+  var z = document.getElementById('dropZone');
+  var names = Array.from(files).map(function(f){ return f.name; });
+  var display = names.length ? '📎 ' + names.join('<br>📎 ') : '';
+  document.getElementById('fileNames').innerHTML = display;
+  document.getElementById('dropText').textContent = names.length ? names.length + ' file(s) selected' : 'DRAG & DROP FILES HERE';
+  z.style.borderColor = names.length ? 'var(--orange)' : 'var(--gray)';
+  z.style.background = names.length ? 'rgba(241,95,35,.04)' : 'var(--offwhite)';
+  z.dataset.selected = names.length ? '1' : '';
+  // sync files to the hidden input
+  try {
+    var dt = new DataTransfer();
+    Array.from(files).forEach(function(f){ dt.items.add(f); });
+    document.getElementById('fileInput').files = dt.files;
+  } catch(e){}
+}
+
+// Set up drag and drop on the drop zone after it renders
+document.addEventListener('DOMContentLoaded', function() {
+  // Detect touch device — show tap-friendly text on mobile
+  if ('ontouchstart' in window) {
+    var dt = document.getElementById('dropText');
+    if (dt) dt.textContent = 'TAP TO ATTACH PHOTOS OR FILES';
+  }
+
+  // Drag and drop setup
+  function initDropZone() {
+    var zone = document.getElementById('dropZone');
+    if (!zone) return;
+    zone.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      zone.style.borderColor = 'var(--orange)';
+      zone.style.background = 'rgba(241,95,35,.06)';
+      zone.style.transform = 'scale(1.01)';
+    });
+    zone.addEventListener('dragleave', function(e) {
+      zone.style.borderColor = zone.dataset.selected ? 'var(--orange)' : 'var(--gray)';
+      zone.style.background = zone.dataset.selected ? 'rgba(241,95,35,.04)' : 'var(--offwhite)';
+      zone.style.transform = 'scale(1)';
+    });
+    zone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      zone.style.transform = 'scale(1)';
+      var files = e.dataTransfer.files;
+      if (files.length) handleFileSelect(files);
+    });
+  }
+
+  // Init immediately and also after any nav (SPA re-render)
+  initDropZone();
+  var origNav = window.nav;
+  if (origNav) {
+    window.nav = function(page, push) {
+      origNav(page, push);
+      setTimeout(initDropZone, 300);
+    };
+  }
+});
 
 // Netlify Forms submission handler
 document.addEventListener('DOMContentLoaded', function() {
