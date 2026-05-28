@@ -1089,19 +1089,16 @@ img{max-width:100%;display:block}
       <!-- CONTACT FORM -->
       <div>
         <h2 style="margin-bottom:24px">Send Us a Message</h2>
-        <!-- ================================================
-             Web3Forms — submissions delivered to your email
-             Access Key: 118d156e-6782-403e-a693-b435e5b659c2
-             ================================================ -->
         <form id="contactForm"
-              action="https://api.web3forms.com/submit"
+              name="contact"
               method="POST"
-              enctype="multipart/form-data">
+              enctype="multipart/form-data"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field">
 
-          <input type="hidden" name="access_key" value="118d156e-6782-403e-a693-b435e5b659c2">
+          <input type="hidden" name="form-name" value="contact">
           <input type="hidden" name="subject" value="New Project Inquiry — Precision Laser Solutions">
-          <input type="hidden" name="from_name" value="Precision Laser Solutions Website">
-          <input type="checkbox" name="botcheck" style="display:none">
+          <p style="display:none"><input name="bot-field"></p>
 
           <div class="form-row">
             <div class="form-group"><label>First Name *</label><input type="text" name="first_name" placeholder="First name" required></div>
@@ -1419,7 +1416,7 @@ function showFileNames(input) {
   document.getElementById('fileNames').textContent = names ? '📎 ' + names : '';
 }
 
-// Web3Forms submission handler
+// Netlify Forms submission handler
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('contactForm');
   if (!form) return;
@@ -1429,26 +1426,23 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.textContent = 'Sending...';
     btn.disabled = true;
     var data = new FormData(form);
-    fetch('https://api.web3forms.com/submit', { method:'POST', body:data })
-      .then(function(r){ return r.json(); })
-      .then(function(d){
-        if(d.success){
-          document.getElementById('form-success').style.display = 'block';
-          form.reset();
-          document.getElementById('fileNames').textContent = '';
-          document.getElementById('dropZone').style.borderColor = 'var(--gray)';
-          btn.textContent = '✓ Sent';
-        } else {
-          btn.textContent = 'Send Message';
-          btn.disabled = false;
-          alert('Something went wrong. Please try again or email us directly.');
-        }
-      })
-      .catch(function(){
-        btn.textContent = 'Send Message';
-        btn.disabled = false;
-        alert('Something went wrong. Please try again or email us directly.');
-      });
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Accept': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString()
+    })
+    .then(function() {
+      document.getElementById('form-success').style.display = 'block';
+      form.reset();
+      document.getElementById('fileNames').textContent = '';
+      document.getElementById('dropZone').style.borderColor = 'var(--gray)';
+      btn.textContent = '✓ Sent';
+    })
+    .catch(function() {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again or email us directly.');
+    });
   });
 });
 
